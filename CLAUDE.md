@@ -14,10 +14,10 @@ When working **inside a prototype**, follow that prototype's [CLAUDE.md](prototy
 
 ## Brand identity
 
-- **Single source of truth:** [shared/brand.ts](shared/brand.ts). Never hard-code the studio name, address, founder, year, phone, or email in components — always import from `@shared/brand`.
-- **Norwegian copy:** [shared/copy/no.ts](shared/copy/no.ts). Bokmål default. English variant (`en.ts`) deferred to v2 of the premium tier.
+- **Single source of truth (per prototype):** `prototypes/<tier>/src/lib/brand.ts`, imported as `@shared/brand`. Each tier carries its own copy so deploys (Vercel Root Directory = the prototype folder) are self-contained — no cross-folder imports.
+- **Norwegian copy (per prototype):** `prototypes/<tier>/src/lib/copy/no.ts`, imported as `@shared/copy/no`. Bokmål default. English variant (`en.ts`) deferred to v2 of the premium tier.
 - **Demo brand:** Lysning Studio · Ingvild Lysne · Orkdalsveien 47, 7300 Orkanger · est. 2018.
-- When forking a prototype for a real customer, the only file that should need editing for identity changes is `shared/brand.ts` (and asset filenames).
+- When forking a prototype for a real customer, the only file that should need editing for identity changes is the prototype's own `src/lib/brand.ts` (and asset filenames). Keep both prototypes' `brand.ts` in sync by hand if you change one — there is no shared parent file.
 
 ## Imagery & video
 

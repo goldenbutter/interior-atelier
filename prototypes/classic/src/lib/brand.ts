@@ -1,7 +1,7 @@
 /**
  * Single source of truth for studio identity.
  *
- * When forking this monorepo for a real customer, this is the ONLY identity
+ * When forking this prototype for a real customer, this is the ONLY identity
  * file that needs editing — components import `brand` from `@shared/brand`
  * and never hard-code studio details inline.
  */
