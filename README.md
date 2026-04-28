@@ -1,24 +1,29 @@
-# Interior Atelier — Norway Interior Designer Website Templates
+# Interior Atelier — Demo websites for a fictional Norwegian interior design studio
 
-A monorepo of demo websites for cold-pitching to interior designers in Norway who don't yet own a website. Two tiers, one fictional brand (Lysning Studio · Orkanger), Bokmål default — both shipped to production on Vercel.
+**A self-directed UX/UI study** exploring how the same brand reads across different design intensities. Two distinct tiers built around one fictional studio (Lysning Studio · Orkanger), each with its own visual language, motion vocabulary, and component set. All copy is in Norwegian Bokmål.
 
-| Tier | Price | Folder | Live URL |
-|---|---|---|---|
-| Classic | 9,999 kr | [prototypes/classic/](prototypes/classic/) | **[demo-lysning-classic.ibithun.com](https://demo-lysning-classic.ibithun.com)** |
-| Premium | 19,999 kr | [prototypes/premium/](prototypes/premium/) | **[demo-lysning-premium.ibithun.com](https://demo-lysning-premium.ibithun.com)** |
-| Ultra Premium | 34,999 kr | *(deferred)* | — |
+## Purpose
 
-Each site is a self-contained Next.js 16 app deployed to its own Vercel project, auto-deploying from `master` via GitHub. Only the prototype that actually changed in a push redeploys (Vercel "Skip deployments" toggle on each project's Root Directory).
+I wanted to see how far the same content stretches across different design temperaments — a quiet, deliberately restrained editorial site versus a more flagship, scroll-driven, motion-heavy one — and how that affects everything downstream: typography weight, colour palette restraint, image cadence, even what "press marquee" or "material library" feels appropriate where. Lysning Studio is a fictional Trøndelag-based interior architect, used as a believable canvas to host both versions.
+
+## Live demos
+
+| Tier | Folder | URL |
+|---|---|---|
+| Classic | [prototypes/classic/](prototypes/classic/) | **[demo-lysning-classic.ibithun.com](https://demo-lysning-classic.ibithun.com)** |
+| Premium | [prototypes/premium/](prototypes/premium/) | **[demo-lysning-premium.ibithun.com](https://demo-lysning-premium.ibithun.com)** |
+
+Each tier is a self-contained Next.js 16 app deployed to its own Vercel project, auto-deploying from `master` on push.
 
 ## Preview
 
 > Drop GIFs / screenshots into `docs/media/` to fill these in.
 
-### Classic — `demo-lysning-classic.ibithun.com`
+### Classic
 
 ![Classic preview](docs/media/classic-preview.gif)
 
-### Premium — `demo-lysning-premium.ibithun.com`
+### Premium
 
 ![Premium preview](docs/media/premium-preview.gif)
 
@@ -32,56 +37,68 @@ Each site is a self-contained Next.js 16 app deployed to its own Vercel project,
 
 </details>
 
+## What's different between the two
+
+**Classic** leans editorial-quiet: no `framer-motion`, a single IntersectionObserver-driven reveal hook, an Elvebooking-style accordion gallery, monochrome-to-colour philosophy hover, a small set of sections (hero, philosophy, services, projects, process, contact), simple fully-static cards.
+
+**Premium** leans flagship: scroll-driven hero "explode" effect with a Whisk-generated 360° pan video underneath, "Doppelrand" double-bezel framing, magnetic CTA buttons, press marquee, six-tile material library bento, testimonials wall, a stylised SVG service-area map of Trøndelag, language-toggle placeholder in the nav. Uses `framer-motion` throughout.
+
+Both share the same fictional brand identity, Norwegian copy, fonts (Cormorant Garamond + Geist + Geist Mono), and the same Doppelrand colour palette (bone, cream, clay, charcoal, graphite, stone).
+
+## Tech stack
+
+- **Framework:** Next.js 16 (Turbopack) · React 19 · Tailwind v4
+- **Motion:** `framer-motion` 12 (premium only) · IntersectionObserver-driven CSS reveal (classic)
+- **Icons:** `@phosphor-icons/react`
+- **Typography:** Cormorant Garamond (display) · Geist (body) · Geist Mono (editorial), all via `next/font/google`
+- **Imagery:** curated stills generated via Whisk (labs.google) and Nano Banana (Gemini 2.5 Flash Image); 360° hero pan video via Whisk image-to-video; chroma-keyed badge logo via Sharp + flood-fill
+- **Hosting:** two Vercel projects, both connected to this GitHub repo with Root Directory pinned per prototype and "Skip deployments when no changes to root" enabled — pushing classic-only changes never rebuilds premium
+
 ## Local dev
 
-Each prototype is its own self-contained Next.js app. Run them independently:
+Each prototype is its own self-contained Next.js app:
 
 ```bash
-# Premium
+# Premium — http://localhost:3000
 cd prototypes/premium
-npm install      # only needed once
-npm run dev      # http://localhost:3000
+npm install
+npm run dev
 
-# Classic (separate terminal, different port)
+# Classic — http://localhost:3001  (separate terminal)
 cd prototypes/classic
 npm install
-npm run dev      # http://localhost:3001
+npm run dev
 ```
 
-## Brand & content
+## Repo layout
 
-- Studio identity (per prototype): `prototypes/<tier>/src/lib/brand.ts`, imported as `@shared/brand`. Each tier carries its own copy so deploys are self-contained — no cross-folder imports during build.
-- Norwegian copy (per prototype): `prototypes/<tier>/src/lib/copy/no.ts`, imported as `@shared/copy/no`. Bokmål default; English variant deferred to v2 of premium.
-- Brand assets (committed): `prototypes/<tier>/public/assets/img/lysning-*.{jpg,png}`.
-- AI image prompts: [scripts/prompts/](scripts/prompts/), generation via [scripts/generate-images.ts](scripts/generate-images.ts) (paid Gemini path; needs `GEMINI_API_KEY`).
-- Whisk prompt library (free fallback for stills + video): [scripts/whisk-prompts.md](scripts/whisk-prompts.md).
-- Background-removal pipeline for the brand badge logo: [scripts/remove-bg.mjs](scripts/remove-bg.mjs).
+```
+prototypes/
+  classic/                    # Classic tier — Next.js app
+    src/
+      app/                    # App Router entry, layout, globals.css, icon.png (favicon)
+      components/             # Section components (PascalCase.tsx)
+      lib/
+        brand.ts              # Studio identity (imported as @shared/brand)
+        copy/no.ts            # Norwegian Bokmål copy (imported as @shared/copy/no)
+        useReveal.ts          # IntersectionObserver-driven reveal hook
+    public/assets/img/        # Brand stills (lysning-*.{jpg,png})
+  premium/                    # Premium tier — same shape, framer-motion, more sections
 
-## Deploy
+scripts/
+  generate-images.ts          # Nano Banana / Gemini Flash image generation (paid path)
+  whisk-prompts.md            # Whisk prompt library (free fallback for stills + video)
+  remove-bg.mjs               # Sharp-based flood-fill chroma key for the badge logo
+  prompts/                    # Versioned image-generation prompts
 
-- Each prototype is a separate Vercel project (`demo-lysning-classic`, `demo-lysning-premium`) under the `goldenbutters-projects` team, both connected to `goldenbutter/interior-atelier`.
-- **Root Directory** on each Vercel project = `prototypes/<tier>`, with **Skip deployments when no changes to root directory** enabled — pushing a change to one prototype only redeploys that prototype.
-- Custom domains live on `ibithun.com` (DNS at dns-parking.com, CNAMEd to Vercel's per-project edge endpoint).
-- Manual deploys via CLI from inside a prototype: `npx vercel --prod --yes`.
-
-## Adapting for a real customer
-
-When you sign a real interior designer, fork the matching tier:
-
-```bash
-cp -r prototypes/premium customers/<studio-slug>
-# Edit src/lib/brand.ts (and src/lib/copy/no.ts) for the new studio
-# Replace public/assets/img/lysning-*.* with the studio's actual assets
-# Create a new Vercel project pointing at customers/<studio-slug>/
+docs/
+  media/                      # README screenshots & GIFs (drop targets)
 ```
 
-Long-term, this workflow is packaged as the `norway-interior-designer` Claude Code skill so future agents can do the fork in one prompt.
+## Notes on the build process
 
-## Stack
-
-- Next.js 16 (Turbopack) · React 19 · Tailwind v4 · framer-motion · @phosphor-icons/react
-- Cormorant Garamond (display) · Geist (body) · Geist Mono (editorial)
-- Nano Banana (Gemini 2.5 Flash Image) for stills · Whisk / Google Labs Flow for video (manual generation)
-- Sharp for the badge-logo background-removal pipeline (`scripts/remove-bg.mjs`)
+- **Per-prototype source of truth** for brand identity. Each prototype carries its own `src/lib/brand.ts` and `src/lib/copy/no.ts`, imported via the `@shared/*` path alias. The earlier monorepo-shared `shared/` folder at the repo root was inlined into each prototype because Vercel's per-project Root Directory setting only uploads files inside the specified subfolder during build.
+- **Skip-deployments isolation** so each prototype builds independently. With the GitHub integration connected, a push that only touches `prototypes/classic/**` redeploys only classic; same for premium. Root-only doc changes (this README) redeploy neither.
+- **Brand badge logo** is a flood-fill chroma-key derivative of a single source PNG — cream interior preserved inside the circle outline, transparent halo outside, so the same asset reads on both light and dark surfaces without needing per-context variants. See [scripts/remove-bg.mjs](scripts/remove-bg.mjs).
 
 Developed by **Bithun**.
