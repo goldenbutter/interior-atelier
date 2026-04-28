@@ -1,0 +1,63 @@
+{
+  "$schema": "../prompts.schema.json",
+  "brand": "Lysning Studio",
+  "styleGuide": "Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Lived-in feel. Hand-loomed wool, oak parquet, linen, brass fixtures. Composition: balanced, asymmetric, magazine-grade (Wallpaper / AD / The Modern House). Avoid: HDR, oversaturation, harsh shadows, modern tech aesthetics, lens flare, digital noise.",
+  "stills": [
+    {
+      "id": "lysning-bjorkely",
+      "tier": "both",
+      "filename": "lysning-bjorkely.jpg",
+      "aspect": "3:4",
+      "prompt": "Editorial interior photograph of a 1930s Norwegian Funkis villa living room in Bygdøy, Oslo. Oak parquet floor, cream linen sofa with rounded back, low travertine coffee table holding a single ceramic vase. Tall windows with linen curtains, late afternoon north light spilling across the floor. Walls in warm bone with subtle texture. One mid-century armchair upholstered in oat wool. A jute rug. View of birch trees through the window. Magazine-grade composition, balanced asymmetry, wide depth of field, soft natural shadows. No people. Shot on medium-format film aesthetic."
+    },
+    {
+      "id": "lysning-fjordstuen",
+      "tier": "both",
+      "filename": "lysning-fjordstuen.jpg",
+      "aspect": "4:5",
+      "prompt": "Interior of a traditional Norwegian log cabin (laftet tømmerhus) in Hardanger, restored as a discreet retreat. Exposed dark-stained timber walls, low ceiling, hand-knotted woolen throw on a built-in bench seat. Slate floor. Cast-iron wood stove glowing softly. A small window framing a sliver of fjord and mountain. Brass oil lamp on a side table. Warm tonal palette, late winter morning light. Editorial composition, no people, soft natural shadows, slightly overexposed highlights for a warm filmic feel."
+    },
+    {
+      "id": "lysning-bryggehuset",
+      "tier": "both",
+      "filename": "lysning-bryggehuset.jpg",
+      "aspect": "4:5",
+      "prompt": "Interior of a heritage building on Bryggen in Bergen, repurposed as an 8-room boutique residence. Exposed dark red brick on one wall, lime-washed plaster on the others. Vintage tan leather banquette running along the brick wall, beneath a row of antique brass wall sconces. Wide-plank pine floor, weathered. A long communal oak table with three handcrafted Windsor chairs. Tall industrial windows with thin black mullions, grey morning light from the harbour. Magazine-grade interior photography, no people, restrained warm palette, long exposure for soft contrast."
+    },
+    {
+      "id": "lysning-holmenkollen",
+      "tier": "both",
+      "filename": "lysning-holmenkollen.jpg",
+      "aspect": "3:4",
+      "prompt": "Master bedroom of a contemporary Norwegian family home in Holmenkollen, Oslo. North light through floor-to-ceiling windows. Cream linen bedding on a low oak platform bed, hand-loomed grey wool blanket folded at the foot. A single Nordic sheepskin draped over a vintage oak chair. Hand-loomed wool rug in undyed natural tones. Simple matte black reading lamp. View of pine forest in soft focus through the window. No people. Editorial photography style, balanced composition, subtle natural shadows, slightly desaturated palette."
+    },
+    {
+      "id": "lysning-hero",
+      "tier": "premium",
+      "filename": "lysning-hero.jpg",
+      "aspect": "16:9",
+      "prompt": "Wide editorial interior photograph of a Norwegian boutique design studio's signature living space. Asymmetric composition: a low travertine plinth on the left holding a single ceramic vessel, an oak-framed linen sofa centered, a tall industrial window on the right framing soft north light over a birch grove. Bone-coloured walls, cream undertones, warm clay accents. Hand-loomed wool rug. Late afternoon. No people. Magazine cover-grade, depth of field, soft shadows, slightly cinematic colour grade. Composition leaves negative space on the right third for overlay text."
+    },
+    {
+      "id": "lysning-atelier",
+      "tier": "premium",
+      "filename": "lysning-atelier.jpg",
+      "aspect": "1:1",
+      "prompt": "Top-down photograph of an interior designer's working table in a Norwegian atelier. Linen swatches in oat, bone, and clay tones spread across pale oak. A graphite hand-drawing of a floor plan. A small ceramic mug holding pencils. Three cylindrical wood samples (oak, ash, birch). A single sprig of cotton grass. Warm afternoon light from an unseen window. Composition centered but balanced, magazine flat-lay aesthetic, no people, soft natural shadows."
+    },
+    {
+      "id": "lysning-detail-textile",
+      "tier": "premium",
+      "filename": "lysning-detail-textile.jpg",
+      "aspect": "1:1",
+      "prompt": "Macro photograph of hand-loomed Norwegian wool textile from Røros Tweed in a warm oat tone. Visible weave texture, slight irregularities, pulled threads at the edge. A single shaft of late afternoon light raking across the surface. Editorial detail shot for a luxury interior design portfolio. Slightly desaturated, warm undertones. Shallow depth of field."
+    },
+    {
+      "id": "lysning-detail-oak",
+      "tier": "premium",
+      "filename": "lysning-detail-oak.jpg",
+      "aspect": "1:1",
+      "prompt": "Macro photograph of a hand-finished Norwegian oak surface, brushed and oiled to a soft satin sheen. Subtle ray flecks visible, fine grain pattern, one small knot near the bottom edge. Warm directional light from upper left. Editorial detail shot for an interior design portfolio. Restrained natural tone palette, soft contrast."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "interior-atelier",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo of demo websites for Norwegian interior designers (Lysning Studio templates).",
+  "scripts": {
+    "gen:images": "tsx --env-file=.env scripts/generate-images.ts",
+    "gen:images:premium": "tsx --env-file=.env scripts/generate-images.ts --tier premium",
+    "gen:images:classic": "tsx --env-file=.env scripts/generate-images.ts --tier classic",
+    "gen:images:dry": "tsx --env-file=.env scripts/generate-images.ts --dry-run",
+    "dev:premium": "npm --prefix prototypes/premium run dev",
+    "dev:classic": "npm --prefix prototypes/classic run dev"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0"
+  }
+}
