@@ -4,11 +4,13 @@
 
 This repo holds **two demo websites** for Lysning Studio (a fictional Norwegian interior-design studio in Orkanger). They are templates we pitch at three price points to real interior designers in Norway.
 
-| Folder | Tier | Price | Status |
-|---|---|---|---|
-| [prototypes/classic/](prototypes/classic/) | Classic | NOK 9,999 | v1 |
-| [prototypes/premium/](prototypes/premium/) | Premium | NOK 19,999 | v1 |
-| *(future)* | Ultra Premium | NOK 34,999 | deferred |
+| Folder | Tier | Price | Live URL | Vercel project |
+|---|---|---|---|---|
+| [prototypes/classic/](prototypes/classic/) | Classic | NOK 9,999 | [demo-lysning-classic.ibithun.com](https://demo-lysning-classic.ibithun.com) | `demo-lysning-classic` |
+| [prototypes/premium/](prototypes/premium/) | Premium | NOK 19,999 | [demo-lysning-premium.ibithun.com](https://demo-lysning-premium.ibithun.com) | `demo-lysning-premium` |
+| *(future)* | Ultra Premium | NOK 34,999 | — | — |
+
+Both Vercel projects are connected to `goldenbutter/interior-atelier` on the `master` branch with Root Directory = `prototypes/<tier>` and "Skip deployments when no changes to the root directory" **enabled**. Pushing a change to one prototype redeploys only that one.
 
 When working **inside a prototype**, follow that prototype's [CLAUDE.md](prototypes/premium/CLAUDE.md). Conventions below apply across the whole monorepo.
 
@@ -35,12 +37,17 @@ When working **inside a prototype**, follow that prototype's [CLAUDE.md](prototy
 
 Every footer / "built by" surface credits **Bithun** ("Utviklet av Bithun" / "Developed by Bithun"). Never introduce AI-tool attribution anywhere — code, comments, commits, or PR descriptions.
 
+## Imagery pipeline notes
+
+- The Lysning logo at `prototypes/<tier>/public/assets/img/lysning-logo.png` is a **circular badge** — cream interior preserved inside the circle, transparent halo outside — produced by [scripts/remove-bg.mjs](scripts/remove-bg.mjs) (sharp + flood-fill from the four corners). The pristine pre-processing source lives at `_local/logos/` (gitignored) and a committed copy at `scripts/assets/lysning-logo-source.png` for reproducibility.
+- Logos must read on **both light and dark surfaces** without per-context variants. Default to badge-style designs; for line-art logos with no enclosing shape, recolour to a mid-tone (e.g. `clay-deep` `#8a6448` or `stone` `#7a736a`).
+
 ## Adding a new prototype variant
 
 1. `cp -r prototypes/premium prototypes/<new-tier>` (or from `classic` if lower-end)
 2. Update its `CLAUDE.md` and `package.json#name`
 3. Override anything tier-specific in the new copy
-4. Add a new Vercel project pointing at `prototypes/<new-tier>/`
+4. Add a new Vercel project pointing at `prototypes/<new-tier>/` — connect to GitHub, set Root Directory, enable "Skip deployments"
 
 ## Adding a new real-customer site
 
