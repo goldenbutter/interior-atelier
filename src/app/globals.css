@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bone: #f4efe6;
+  --cream: #ebe3d3;
+  --sand: #d8cdb8;
+  --clay: #b08666;
+  --clay-deep: #8a6448;
+  --charcoal: #1a1815;
+  --graphite: #2c2824;
+  --stone: #7a736a;
+  --ash: #b4aca0;
+  --line: rgba(26, 24, 21, 0.12);
+  --line-strong: rgba(26, 24, 21, 0.24);
+
+  --background: var(--bone);
+  --foreground: var(--charcoal);
+
+  --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-bone: var(--bone);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-clay: var(--clay);
+  --color-clay-deep: var(--clay-deep);
+  --color-charcoal: var(--charcoal);
+  --color-graphite: var(--graphite);
+  --color-stone: var(--stone);
+  --color-ash: var(--ash);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-geist);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "ss03", "cv11";
+  letter-spacing: -0.005em;
+}
+
+::selection {
+  background: var(--charcoal);
+  color: var(--bone);
+}
+
+.font-display {
+  font-family: var(--font-cormorant), ui-serif, Georgia, serif;
+  font-feature-settings: "liga", "dlig", "ss01";
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.eyebrow {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--stone);
+}
+
+.hairline {
+  height: 1px;
+  background: var(--line-strong);
+  width: 100%;
+}
+
+/* Editorial film-grain — fixed, pointer-events-none, never on scrolling containers */
+.grain-overlay {
+  background-image:
+    radial-gradient(rgba(26, 24, 21, 0.18) 1px, transparent 1px),
+    radial-gradient(rgba(26, 24, 21, 0.08) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  mix-blend-mode: multiply;
+  opacity: 0.18;
+}
+
+/* Doppelrand — outer shell + inner highlight (set on the inner core element) */
+.bezel-inner {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(26, 24, 21, 0.08);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 56s linear infinite;
+  will-change: transform;
+}
+
+@keyframes drift-blob {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.06);
+  }
+}
+
+.ambient-blob {
+  position: fixed;
+  inset: auto;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.5;
+  animation: drift-blob 28s var(--ease-soft) infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track,
+  .ambient-blob {
+    animation: none;
+  }
 }
