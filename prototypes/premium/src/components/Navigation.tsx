@@ -8,14 +8,15 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { List, X } from "@phosphor-icons/react";
+import { brand } from "@shared/brand";
+import { copyNo } from "@shared/copy/no";
 
 const links = [
-  { label: "Philosophy", href: "#philosophy" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "Process", href: "#process" },
-  { label: "Journal", href: "#journal" },
-  { label: "Contact", href: "#contact" },
+  { label: copyNo.nav.philosophy, href: "#filosofi" },
+  { label: copyNo.nav.services, href: "#tjenester" },
+  { label: copyNo.nav.projects, href: "#prosjekter" },
+  { label: copyNo.nav.process, href: "#prosess" },
+  { label: copyNo.nav.contact, href: "#kontakt" },
 ];
 
 export default function Navigation() {
@@ -51,15 +52,15 @@ export default function Navigation() {
           <a href="#top" className="group flex items-center gap-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-full border border-charcoal/70 text-charcoal transition-colors group-hover:bg-charcoal group-hover:text-bone">
               <span className="font-display text-lg leading-none italic">
-                a
+                {brand.monogram.toLowerCase()}
               </span>
             </span>
             <span className="flex flex-col leading-none">
               <span className="font-display text-xl tracking-tight text-charcoal">
-                Interior Atelier
+                {brand.name}
               </span>
               <span className="eyebrow mt-1 text-[9px]">
-                Est. MMXII · London
+                Est. {brand.founded} · {brand.address.city}
               </span>
             </span>
           </a>
@@ -77,12 +78,34 @@ export default function Navigation() {
             ))}
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden items-center gap-4 lg:flex">
+            {/* Language toggle — placeholder. v1 is Bokmål only; EN translations land in shared/copy/en.ts per real-client engagement. */}
+            <div
+              role="group"
+              aria-label="Velg språk"
+              className="flex items-center gap-1 rounded-full border border-charcoal/15 bg-bone/60 p-1 backdrop-blur-sm"
+            >
+              <span
+                aria-current="true"
+                className="rounded-full bg-charcoal px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-bone"
+              >
+                NO
+              </span>
+              <button
+                type="button"
+                disabled
+                aria-label="English (kommer snart)"
+                className="cursor-not-allowed rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-stone/60 transition-colors"
+              >
+                EN
+              </button>
+            </div>
+
             <a
-              href="#contact"
+              href="#kontakt"
               className="group relative inline-flex items-center gap-3 rounded-full bg-charcoal py-1.5 pl-5 pr-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-bone transition-[transform,background] duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-graphite active:scale-[0.98]"
             >
-              Book a consultation
+              {copyNo.nav.bookCta}
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-bone/10 text-bone ring-1 ring-bone/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-[2px] group-hover:-translate-y-[1px] group-hover:bg-bone/20">
                 <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -93,7 +116,7 @@ export default function Navigation() {
 
           <button
             type="button"
-            aria-label="Open menu"
+            aria-label="Åpne meny"
             onClick={() => setOpen(true)}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/40 text-charcoal lg:hidden"
           >
@@ -113,11 +136,11 @@ export default function Navigation() {
           >
             <div className="flex h-20 items-center justify-between px-6">
               <span className="font-display text-xl tracking-tight">
-                Interior Atelier
+                {brand.name}
               </span>
               <button
                 type="button"
-                aria-label="Close menu"
+                aria-label="Lukk meny"
                 onClick={() => setOpen(false)}
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-bone/30"
               >
@@ -144,11 +167,11 @@ export default function Navigation() {
               ))}
             </nav>
             <div className="absolute bottom-10 left-6 right-6">
-              <p className="eyebrow text-bone/60">Studio</p>
+              <p className="eyebrow text-bone/60">{copyNo.contact.studioLabel}</p>
               <p className="mt-3 text-sm text-bone/80">
-                14 Mount Street, Mayfair
+                {brand.address.street}
                 <br />
-                London W1K 2RH
+                {brand.address.postalCode} {brand.address.city}, {brand.address.region}
               </p>
             </div>
           </motion.div>

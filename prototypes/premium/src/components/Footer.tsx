@@ -1,22 +1,15 @@
 import { InstagramLogo, PinterestLogo } from "@phosphor-icons/react/dist/ssr";
-
-const columns = [
-  {
-    title: "Studio",
-    links: ["Philosophy", "The atelier", "Careers", "Press"],
-  },
-  {
-    title: "Work",
-    links: ["Residences", "Heritage", "Hospitality", "Archive"],
-  },
-  {
-    title: "Practice",
-    links: ["Process", "Fees", "Consultation", "FAQ"],
-  },
-];
+import { brand } from "@shared/brand";
+import { copyNo } from "@shared/copy/no";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const columns = [
+    { title: copyNo.footer.studioCol, links: copyNo.footer.studioLinks },
+    { title: copyNo.footer.workCol, links: copyNo.footer.workLinks },
+    { title: copyNo.footer.practiceCol, links: copyNo.footer.practiceLinks },
+  ];
+
   return (
     <footer className="relative bg-bone pt-24 pb-10">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
@@ -24,30 +17,34 @@ export default function Footer() {
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
               <span className="flex h-10 w-10 items-center justify-center rounded-full border border-charcoal/70">
-                <span className="font-display text-xl italic leading-none">a</span>
+                <span className="font-display text-xl italic leading-none">
+                  {brand.monogram.toLowerCase()}
+                </span>
               </span>
               <span className="font-display text-2xl tracking-tight text-charcoal">
-                Interior Atelier
+                {brand.name}
               </span>
             </div>
             <p className="mt-8 max-w-md font-display text-xl italic leading-snug text-stone">
-              &ldquo;A room should never shout. It should unfold.&rdquo;
+              «{brand.tagline}»
             </p>
             <p className="mt-8 text-sm leading-relaxed text-graphite">
-              14 Mount Street, Mayfair<br />
-              London W1K 2RH · United Kingdom
+              {brand.address.street}
+              <br />
+              {brand.address.postalCode} {brand.address.city} ·{" "}
+              {brand.address.country}
             </p>
 
             <div className="mt-10 flex items-center gap-3">
               <a
-                href="https://instagram.com"
+                href={brand.social.instagram}
                 aria-label="Instagram"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/30 text-charcoal transition-colors hover:bg-charcoal hover:text-bone"
               >
                 <InstagramLogo size={18} weight="thin" />
               </a>
               <a
-                href="https://pinterest.com"
+                href={brand.social.pinterest}
                 aria-label="Pinterest"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/30 text-charcoal transition-colors hover:bg-charcoal hover:text-bone"
               >
@@ -78,16 +75,18 @@ export default function Footer() {
         </div>
 
         <div className="relative mt-20 select-none font-display text-[clamp(4rem,18vw,18rem)] font-light leading-[0.85] tracking-[-0.035em] text-charcoal/90">
-          <span className="italic text-clay-deep/95">A</span>telier
+          <span className="italic text-clay-deep/95">{brand.name.charAt(0)}</span>
+          {brand.name.slice(1).toLowerCase()}
           <span className="text-clay">.</span>
         </div>
 
         <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-line pt-8 text-xs text-stone sm:flex-row sm:items-center">
           <p>
-            &copy; {year} · Interior Atelier Ltd. All rights reserved.
-            Registered in England &amp; Wales.
+            © {year} · {brand.name}. {copyNo.footer.rightsReserved}
           </p>
-          <p>Developed by Bithun</p>
+          <p>
+            {copyNo.footer.devBy} <span className="text-charcoal">Bithun</span>
+          </p>
         </div>
       </div>
     </footer>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
+import { brand } from "@shared/brand";
 import "./globals.css";
 
 const geist = Geist({
@@ -24,27 +25,26 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: {
-    default: "Interior Atelier — Considered Interiors for Residences of Distinction",
-    template: "%s · Interior Atelier",
+    default: `${brand.name} — Interiørarkitektur i Trøndelag`,
+    template: `%s · ${brand.name}`,
   },
-  description:
-    "A boutique interior design studio crafting timeless, tactile spaces for private residences, heritage homes, and intimate hospitality projects.",
+  description: `Et lite atelier som former private hjem og vernede bygg ved Orkdalsfjorden. ${brand.tagline}`,
   keywords: [
-    "interior design",
-    "interior atelier",
-    "luxury interiors",
-    "residential design",
-    "bespoke interiors",
-    "heritage renovation",
+    "interiørarkitekt",
+    "interiørdesign",
+    "Orkanger",
+    "Trøndelag",
+    "boligdesign",
+    "vernede bygg",
+    "Lysning Studio",
   ],
   authors: [{ name: "Bithun" }],
   creator: "Bithun",
   openGraph: {
-    title: "Interior Atelier",
-    description:
-      "A boutique interior design studio crafting timeless, tactile spaces.",
+    title: brand.name,
+    description: brand.tagline,
     type: "website",
-    locale: "en_GB",
+    locale: "nb_NO",
   },
 };
 
@@ -55,7 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="nb"
       className={`${geist.variable} ${geistMono.variable} ${cormorant.variable} h-full antialiased`}
     >
       <body className="relative min-h-full flex flex-col bg-bone text-charcoal selection:bg-charcoal selection:text-bone">

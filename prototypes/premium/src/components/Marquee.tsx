@@ -1,25 +1,18 @@
-const PRESS = [
-  "House & Garden",
-  "AD · Architectural Digest",
-  "World of Interiors",
-  "Elle Decoration",
-  "Wallpaper*",
-  "T Magazine",
-  "Cabana",
-  "Vogue Living",
-];
+import { copyNo } from "@shared/copy/no";
 
 export default function Marquee() {
-  const items = [...PRESS, ...PRESS];
+  const items = [...copyNo.marquee.sources, ...copyNo.marquee.sources];
   return (
     <section
-      aria-label="Press & Features"
+      aria-label="Presse & utvalgte omtaler"
       className="relative border-y border-line bg-bone py-9 overflow-hidden"
     >
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-bone to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-bone to-transparent" />
       <div className="flex items-center gap-8">
-        <span className="eyebrow shrink-0 pl-6 lg:pl-12">As seen in</span>
+        <span className="eyebrow shrink-0 pl-6 lg:pl-12">
+          {copyNo.marquee.intro}
+        </span>
         <div className="relative flex-1 overflow-hidden">
           <div className="marquee-track flex w-max items-center gap-14 whitespace-nowrap">
             {items.map((item, i) => (
