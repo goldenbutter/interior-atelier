@@ -45,7 +45,10 @@ export default function Hero() {
     <section
       id="top"
       ref={sectionRef}
-      className="relative min-h-[100dvh] w-full overflow-hidden bg-bone pt-20"
+      // Inline `position: relative` — framer-motion's useScroll measures the target
+      // before Tailwind's `relative` class applies, so we set it both ways defensively.
+      style={{ position: "relative" }}
+      className="min-h-[100dvh] w-full overflow-hidden bg-bone pt-20"
     >
       <div
         aria-hidden
