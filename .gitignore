@@ -52,5 +52,9 @@ prototypes/whisk-image/
 # allow tracked imagery under any public/assets/img to remain
 !**/public/assets/img/*.jpeg
 
-# Claude Code working notes & per-developer settings — never committed
+# Claude Code working notes, agent instructions, settings — never committed
 .claude/
+CLAUDE.md
+AGENTS.md
+**/CLAUDE.md
+**/AGENTS.md
