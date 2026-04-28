@@ -1,6 +1,11 @@
 /**
- * Chroma-key the cream background out of the Lysning logo and write the
- * result as transparent PNGs into each prototype's app folder + assets.
+ * Make the area OUTSIDE the circle transparent and leave the cream inside the
+ * circle intact. The result: a self-contained circular badge that reads on any
+ * background colour without losing the LS calligraphy.
+ *
+ * Flood-fills from the four corners through "background-coloured" pixels and
+ * stops at the dark circle outline — pixels reached from the corners become
+ * transparent, the rest is preserved as-is.
  *
  * Usage: node scripts/remove-bg.mjs
  */
@@ -12,12 +17,8 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "..");
-const sourceLogo = resolve(
-  repoRoot,
-  "prototypes/classic/public/assets/img/lysning-logo.png"
-);
+const sourceLogo = resolve(repoRoot, "scripts/assets/lysning-logo-source.png");
 
-// Targets: each prototype's app/icon.png (favicon) and assets/img/lysning-logo.png
 const targets = [
   "prototypes/classic/src/app/icon.png",
   "prototypes/classic/public/assets/img/lysning-logo.png",
@@ -25,10 +26,11 @@ const targets = [
   "prototypes/premium/public/assets/img/lysning-logo.png",
 ].map((p) => resolve(repoRoot, p));
 
-// Tolerance: how close to the background color a pixel must be to become
-// transparent. Higher = more aggressive removal but risks eating the artwork.
-// 60 is a comfortable starting point for the cream → near-white background.
-const TOLERANCE = 60;
+// Colour distance threshold. A pixel within TOLERANCE of the sampled corner
+// colour is considered "outside cream" and may be flood-filled. Higher values
+// make the fill more aggressive (risk of leaking through line gaps); lower
+// values risk leaving a halo.
+const TOLERANCE = 70;
 
 const { data, info } = await sharp(sourceLogo)
   .ensureAlpha()
@@ -38,17 +40,14 @@ const { data, info } = await sharp(sourceLogo)
 const { width, height, channels } = info;
 const pixels = Buffer.from(data);
 
-// Sample the four corners to estimate the background colour. Average them so
-// a single noisy pixel doesn't skew the key.
+// Average the four corners as the background colour.
 const samples = [
   [0, 0],
   [width - 1, 0],
   [0, height - 1],
   [width - 1, height - 1],
 ];
-let r = 0,
-  g = 0,
-  b = 0;
+let r = 0, g = 0, b = 0;
 for (const [x, y] of samples) {
   const i = (y * width + x) * channels;
   r += pixels[i];
@@ -60,17 +59,56 @@ console.log(
   `[remove-bg] sampled background colour: rgb(${bg.r.toFixed(0)}, ${bg.g.toFixed(0)}, ${bg.b.toFixed(0)})`
 );
 
-// Walk every pixel; convert anything within TOLERANCE of the background colour
-// to fully transparent. Pixels further away keep their original alpha.
-for (let i = 0; i < pixels.length; i += channels) {
+const isBackground = (i) => {
   const dr = pixels[i] - bg.r;
   const dg = pixels[i + 1] - bg.g;
   const db = pixels[i + 2] - bg.b;
-  const dist = Math.sqrt(dr * dr + dg * dg + db * db);
-  if (dist < TOLERANCE) {
-    pixels[i + 3] = 0;
+  return dr * dr + dg * dg + db * db < TOLERANCE * TOLERANCE;
+};
+
+// Flood-fill (BFS) from each corner through connected background pixels.
+// Mark each visited pixel by setting its alpha to 0 and reusing the green
+// channel as a "visited" sentinel — but reset it to bg.g after, so we don't
+// leak the marker into the output. Actually simplest: use a separate boolean
+// array.
+const visited = new Uint8Array(width * height);
+const queue = [];
+const enqueue = (x, y) => {
+  if (x < 0 || y < 0 || x >= width || y >= height) return;
+  const idx = y * width + x;
+  if (visited[idx]) return;
+  if (!isBackground(idx * channels)) return;
+  visited[idx] = 1;
+  queue.push(idx);
+};
+
+for (const [x, y] of samples) enqueue(x, y);
+
+while (queue.length > 0) {
+  const idx = queue.shift();
+  const x = idx % width;
+  const y = (idx / width) | 0;
+  enqueue(x + 1, y);
+  enqueue(x - 1, y);
+  enqueue(x, y + 1);
+  enqueue(x, y - 1);
+}
+
+// Apply: visited pixels become transparent. Everything else (cream inside
+// the circle + the dark calligraphy + the circle outline) stays.
+let cleared = 0;
+for (let i = 0; i < visited.length; i++) {
+  if (visited[i]) {
+    pixels[i * channels + 3] = 0;
+    cleared++;
   }
 }
+console.log(
+  `[remove-bg] cleared ${cleared} of ${visited.length} pixels (${(
+    (cleared / visited.length) *
+    100
+  ).toFixed(1)}%)`
+);
 
 const outBuffer = await sharp(pixels, {
   raw: { width, height, channels },
