@@ -71,7 +71,7 @@ export default function Hero() {
         >
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-cream lg:aspect-auto lg:h-full">
             <Image
-              src="/assets/img/lysning-hero.jpg"
+              src="/assets/img/lysning-bjorkely.jpg"
               alt={`${brand.name} — utvalgt prosjekt`}
               fill
               priority

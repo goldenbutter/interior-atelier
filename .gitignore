@@ -46,6 +46,9 @@ _local/
 public/generated/
 *.jpeg
 
+# Whisk scratch folder — kept locally for re-rolls, never committed
+prototypes/whisk-image/
+
 # allow tracked imagery under any public/assets/img to remain
 !**/public/assets/img/*.jpeg
 

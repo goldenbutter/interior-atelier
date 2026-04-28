@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { InstagramLogo, PinterestLogo } from "@phosphor-icons/react/dist/ssr";
 import { brand } from "@shared/brand";
 import { copyNo } from "@shared/copy/no";
@@ -16,10 +17,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-14 border-t border-line pt-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-charcoal/70">
-                <span className="font-display text-xl italic leading-none">
-                  {brand.monogram.toLowerCase()}
-                </span>
+              <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full">
+                <Image
+                  src="/assets/img/lysning-logo.png"
+                  alt={`${brand.name} monogram`}
+                  width={44}
+                  height={44}
+                  className="h-full w-full object-contain"
+                />
               </span>
               <span className="font-display text-2xl tracking-tight text-charcoal">
                 {brand.name}

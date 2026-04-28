@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
@@ -50,10 +51,15 @@ export default function Navigation() {
       >
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-6 lg:px-12">
           <a href="#top" className="group flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-charcoal/70 text-charcoal transition-colors group-hover:bg-charcoal group-hover:text-bone">
-              <span className="font-display text-lg leading-none italic">
-                {brand.monogram.toLowerCase()}
-              </span>
+            <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full">
+              <Image
+                src="/assets/img/lysning-logo.png"
+                alt={`${brand.name} monogram`}
+                width={40}
+                height={40}
+                priority
+                className="h-full w-full object-contain"
+              />
             </span>
             <span className="flex flex-col leading-none">
               <span className="font-display text-xl tracking-tight text-charcoal">
@@ -135,8 +141,19 @@ export default function Navigation() {
             className="fixed inset-0 z-[60] bg-charcoal text-bone lg:hidden"
           >
             <div className="flex h-20 items-center justify-between px-6">
-              <span className="font-display text-xl tracking-tight">
-                {brand.name}
+              <span className="flex items-center gap-3">
+                <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-bone">
+                  <Image
+                    src="/assets/img/lysning-logo.png"
+                    alt={`${brand.name} monogram`}
+                    width={36}
+                    height={36}
+                    className="h-full w-full object-contain"
+                  />
+                </span>
+                <span className="font-display text-xl tracking-tight">
+                  {brand.name}
+                </span>
               </span>
               <button
                 type="button"

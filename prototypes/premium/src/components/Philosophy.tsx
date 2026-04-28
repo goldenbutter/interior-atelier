@@ -55,26 +55,28 @@ export default function Philosophy() {
             </h2>
 
             <div className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-charcoal/[0.04] p-1.5 ring-1 ring-charcoal/10">
+              {/* Monochrome → colour on hover. The desaturated default lets the page
+                  read as one editorial composition; colour blooms only on intent. */}
+              <div className="group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-charcoal/[0.04] p-1.5 ring-1 ring-charcoal/10">
                 <div className="bezel-inner relative h-full w-full overflow-hidden rounded-[calc(1.75rem-0.375rem)] bg-cream">
                   <Image
                     src="/assets/img/lysning-bjorkely.jpg"
                     alt="Stuen i Bjørkely-villaen"
                     fill
                     sizes="(max-width: 640px) 100vw, 40vw"
-                    className="object-cover"
+                    className="object-cover grayscale-[0.85] saturate-[0.7] transition-all duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0 group-hover:saturate-100 group-hover:scale-[1.03]"
                   />
                 </div>
               </div>
               <div className="flex flex-col justify-end">
-                <div className="relative aspect-square overflow-hidden rounded-[1.5rem] bg-charcoal/[0.04] p-1.5 ring-1 ring-charcoal/10">
+                <div className="group relative aspect-square overflow-hidden rounded-[1.5rem] bg-charcoal/[0.04] p-1.5 ring-1 ring-charcoal/10">
                   <div className="bezel-inner relative h-full w-full overflow-hidden rounded-[calc(1.5rem-0.375rem)] bg-cream">
                     <Image
                       src="/assets/img/lysning-detail-textile.jpg"
                       alt="Hand-vevd ull fra Røros Tweed"
                       fill
                       sizes="(max-width: 640px) 100vw, 40vw"
-                      className="object-cover"
+                      className="object-cover grayscale-[0.85] saturate-[0.7] transition-all duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grayscale-0 group-hover:saturate-100 group-hover:scale-[1.03]"
                     />
                   </div>
                 </div>

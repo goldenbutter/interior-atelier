@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+// Six dedicated material macros — each tile shows the labelled material at
+// macro range. Generated via the prompts in scripts/whisk-prompts.md sections
+// A and C. For per-client builds, regenerate with the studio's actual palette.
 const samples = [
   {
     label: "Røros Tweed · Oat",
@@ -19,22 +22,22 @@ const samples = [
   {
     label: "Travertin · Romersk",
     sub: "Slipt · 20 mm plate",
-    image: "/assets/img/lysning-fjordstuen.jpg",
+    image: "/assets/img/lysning-detail-travertin.jpg",
   },
   {
     label: "Lin · Beauvais",
     sub: "Tett vev · ubleket",
-    image: "/assets/img/lysning-detail-textile.jpg",
+    image: "/assets/img/lysning-detail-lin.jpg",
   },
   {
     label: "Messing · Patinert",
     sub: "Spesialarbeid · atelier",
-    image: "/assets/img/lysning-bryggehuset.jpg",
+    image: "/assets/img/lysning-detail-messing.jpg",
   },
   {
     label: "Skinn · Vegetabilsk",
     sub: "Italiensk · cognac",
-    image: "/assets/img/lysning-bjorkely.jpg",
+    image: "/assets/img/lysning-detail-skinn.jpg",
   },
 ];
 
@@ -78,7 +81,7 @@ export default function MaterialLibrary() {
                     alt={s.label}
                     fill
                     sizes="(max-width: 768px) 50vw, 24vw"
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
                   />
                 </div>
                 <figcaption className="mt-3 px-1 pb-1">

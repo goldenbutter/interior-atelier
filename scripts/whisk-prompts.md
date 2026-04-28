@@ -192,6 +192,54 @@ Manual workflow at [labs.google/fx](https://labs.google/fx) → Whisk. Use this 
 
 ---
 
+## C — Optional polish: 4 dedicated material macros (premium MaterialLibrary)
+
+The premium MaterialLibrary section currently uses interior-shot fallbacks for 4 of its 6 tiles (Travertin, Lin · Beauvais, Messing · Patinert, Skinn · Vegetabilsk). Each tile shows the labelled material as the dominant feature, but they're not true macros. For per-client polish, replace them with these dedicated 1:1 close-ups.
+
+> **All Section C runs use the SQUARE (1:1) Whisk aspect button.** Save each to `prototypes/premium/public/assets/img/<filename>` (committed brand asset, overwriting the current fallback).
+
+---
+
+### Run 9 — `lysning-detail-travertin.jpg`
+
+> Square 1:1 aspect ratio macro photograph of a Roman travertine stone slab, polished surface with visible natural pitting and warm cream-and-honey tonal banding. Diagonal directional light raking across from upper left, casting subtle texture shadows in the porous holes. Editorial detail shot for a luxury interior design portfolio. Restrained natural tone palette. Shallow depth of field — the lower edge of the slab is in soft focus.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Avoid HDR, oversaturation, harsh shadows, lens flare, digital noise.
+
+> Then update [premium MaterialLibrary.tsx](../prototypes/premium/src/components/MaterialLibrary.tsx) — change the Travertin entry's `image` to `/assets/img/lysning-detail-travertin.jpg`.
+
+---
+
+### Run 10 — `lysning-detail-lin.jpg`
+
+> Square 1:1 aspect ratio macro photograph of unbleached French linen fabric from Beauvais, tightly woven, ivory-cream tone. Visible weave structure at extreme close range, slight slubs and natural irregularities, one fold creating a soft diagonal shadow across the frame. Late afternoon light raking from upper right. Editorial detail shot for a luxury interior design portfolio. Slightly desaturated, warm undertones, shallow depth of field.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Avoid HDR, oversaturation, harsh shadows, lens flare, digital noise.
+
+> Then update MaterialLibrary's Lin · Beauvais entry → `/assets/img/lysning-detail-lin.jpg`.
+
+---
+
+### Run 11 — `lysning-detail-messing.jpg`
+
+> Square 1:1 aspect ratio macro photograph of a hand-patinated brass surface, warm aged-gold tone with mottled darker patina spots, slight hammered or brushed texture. A single strong diagonal highlight rakes across from upper left, picking out the metal's subtle ridges. Editorial detail shot for a luxury interior design portfolio. Restrained natural tone palette, soft contrast, shallow depth of field.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Avoid HDR, oversaturation, harsh shadows, lens flare, digital noise.
+
+> Then update MaterialLibrary's Messing · Patinert entry → `/assets/img/lysning-detail-messing.jpg`.
+
+---
+
+### Run 12 — `lysning-detail-skinn.jpg`
+
+> Square 1:1 aspect ratio macro photograph of vegetable-tanned Italian leather in cognac brown tone, soft satin sheen, visible grain pattern with natural variations. The corner of a leather panel folds gently in the lower-third creating a sculptural shadow. Warm directional light from upper left. Editorial detail shot for a luxury interior design portfolio. Slightly desaturated, warm undertones, shallow depth of field.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Avoid HDR, oversaturation, harsh shadows, lens flare, digital noise.
+
+> Then update MaterialLibrary's Skinn · Vegetabilsk entry → `/assets/img/lysning-detail-skinn.jpg`.
+
+---
+
 ## Naming convention
 
 - `<brand-slug>-<scene-id>.mp4` (matches the seed image's id where possible)

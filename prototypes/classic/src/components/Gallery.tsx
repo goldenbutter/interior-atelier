@@ -1,35 +1,9 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { copyNo } from "@shared/copy/no";
 
 export default function Gallery() {
-  const [active, setActive] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
   const projects = copyNo.projects.list;
-
-  // Staggered entrance animation when section enters viewport (Elvebooking pattern)
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    container.classList.add("has-animation");
-    const obs = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          obs.unobserve(entry.target);
-          const opts = container.querySelectorAll<HTMLElement>(".gallery-option");
-          opts.forEach((opt, i) => {
-            setTimeout(() => opt.classList.add("animated"), 150 * i);
-          });
-        }
-      },
-      { threshold: 0.1 }
-    );
-    obs.observe(container);
-    return () => obs.disconnect();
-  }, []);
 
   return (
     <section id="prosjekter" className="relative bg-bone py-24 lg:py-36">
@@ -48,57 +22,68 @@ export default function Gallery() {
               {copyNo.projects.headingRest}
             </h2>
           </div>
-          <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-charcoal/70">
+          <a
+            href="#alle-prosjekter"
+            className="group inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.22em] text-charcoal"
+          >
             {copyNo.projects.archive}
-          </p>
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-charcoal/70 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-charcoal group-hover:text-bone group-hover:translate-x-[3px] group-hover:-translate-y-[2px]">
+              <ArrowUpRight size={14} weight="thin" />
+            </span>
+          </a>
         </div>
 
-        <div
-          ref={containerRef}
-          className="gallery-selector mt-16"
-          style={
-            {
-              ["--gallery-count"]: projects.length,
-            } as React.CSSProperties
-          }
-          role="tablist"
-          aria-label="Prosjektgalleri"
-        >
+        <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-16 md:grid-cols-2 lg:gap-x-10 lg:gap-y-20">
           {projects.map((p, i) => {
-            const isActive = active === i;
+            const isTall = "tall" in p && p.tall === true;
             return (
-              <div
-                key={p.slug}
-                className={`gallery-option ${isActive ? "active" : ""}`}
-                role="tab"
-                tabIndex={0}
-                aria-selected={isActive}
-                onClick={() => setActive(i)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActive(i);
-                  }
-                }}
+              <a
+                key={p.no}
+                href={`#prosjekt-${p.slug}`}
+                className={`reveal block ${i % 2 === 1 ? "md:mt-12" : ""}`}
+                style={
+                  {
+                    ["--reveal-delay"]: `${(i % 2) * 100}ms`,
+                  } as React.CSSProperties
+                }
               >
-                <Image
-                  src={p.image}
-                  alt={p.title}
-                  fill
-                  sizes={isActive ? "(max-width: 768px) 100vw, 40vw" : "(max-width: 768px) 100vw, 18vw"}
-                  className="gallery-option-img"
-                />
-                <div className="gallery-option-cap">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em]">
-                    {p.no} <span className="opacity-60">/ {String(projects.length).padStart(2, "0")}</span>
-                  </p>
-                  <p className="font-display text-2xl leading-tight">{p.title}</p>
-                  <p className="text-[12px] text-bone/85">
-                    {p.location} · {p.year}
-                  </p>
-                  <p className="text-[11px] text-bone/70">{p.type}</p>
+                <div
+                  className={`relative overflow-hidden rounded-lg bg-cream ${
+                    isTall ? "aspect-[3/4]" : "aspect-[4/5]"
+                  }`}
+                >
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 45vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute left-5 top-5">
+                    <span className="inline-flex h-9 items-center rounded-full bg-bone/85 px-4 font-mono text-[10px] uppercase tracking-[0.22em] text-charcoal backdrop-blur-md ring-1 ring-charcoal/5">
+                      {p.no} <span className="mx-1.5 text-stone/60">/</span>{" "}
+                      {String(projects.length).padStart(2, "0")}
+                    </span>
+                  </div>
                 </div>
-              </div>
+
+                <div className="mt-6 flex items-start justify-between gap-6">
+                  <div>
+                    <h3 className="font-display text-2xl leading-tight text-charcoal lg:text-3xl">
+                      {p.title}
+                    </h3>
+                    <p className="eyebrow mt-2">{p.location}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-display text-lg italic text-stone">
+                      {p.year}
+                    </p>
+                    <p className="eyebrow mt-1 max-w-[11rem] text-[9px] normal-case tracking-wide">
+                      {p.type}
+                    </p>
+                  </div>
+                </div>
+              </a>
             );
           })}
         </div>
