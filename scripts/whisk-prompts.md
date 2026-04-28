@@ -7,12 +7,26 @@ Manual workflow at [labs.google/fx](https://labs.google/fx) → Whisk. Use this 
 
 ## Output destinations
 
-| Asset type | Save to |
-|---|---|
-| Stills | `prototypes/<tier>/public/generated/img/<id>.jpg` |
-| Videos | `prototypes/premium/public/generated/videos/<id>.mp4` |
+| Asset type | Save to | Tracked? |
+|---|---|---|
+| **Brand stills** (replace placeholders, ship with the demo) | `prototypes/<tier>/public/assets/img/<id>.jpg` | **Committed** — these are the canonical brand assets |
+| **Iteration / experiments** | `prototypes/<tier>/public/generated/img/<id>.jpg` | Gitignored |
+| **Videos** (premium hero etc.) | `prototypes/premium/public/generated/videos/<id>.mp4` | Gitignored |
 
-All files are gitignored (`public/generated/` is never committed).
+> **For Lysning Studio brand replacement (this round):** save each Whisk JPG to `public/assets/img/` (committed). Stills marked "both" tiers go to **two folders** — `prototypes/classic/public/assets/img/` AND `prototypes/premium/public/assets/img/` — same filename. Premium-only stills go only to premium.
+
+### Quick reference — where each still belongs
+
+| Still ID | Classic? | Premium? |
+|---|---|---|
+| lysning-bjorkely | ✓ | ✓ |
+| lysning-fjordstuen | ✓ | ✓ |
+| lysning-bryggehuset | ✓ | ✓ |
+| lysning-holmenkollen | ✓ | ✓ |
+| lysning-hero | — | ✓ |
+| lysning-atelier | — | ✓ |
+| lysning-detail-textile | — | ✓ |
+| lysning-detail-oak | — | ✓ |
 
 ## A — Stills (use only if `npm run gen:images` is paid-blocked)
 
