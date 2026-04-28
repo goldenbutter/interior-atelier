@@ -28,80 +28,167 @@ Manual workflow at [labs.google/fx](https://labs.google/fx) → Whisk. Use this 
 | lysning-detail-textile | — | ✓ |
 | lysning-detail-oak | — | ✓ |
 
-## A — Stills (use only if `npm run gen:images` is paid-blocked)
+## A — Stills · 8 Whisk runs total
 
-Common style prefix to append to every still prompt below:
-
-> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Lived-in feel. Hand-loomed wool, oak parquet, linen, brass fixtures. Composition: balanced, asymmetric, magazine-grade (Wallpaper / AD). Avoid HDR, oversaturation, harsh shadows, modern tech aesthetics, lens flare, digital noise. **No people in any image.**
-
-### A1 — `lysning-bjorkely.jpg` (3:4) · used by both classic + premium
-
-> Editorial interior photograph of a 1930s Norwegian Funkis villa living room in Bygdøy, Oslo. Oak parquet floor, cream linen sofa with rounded back, low travertine coffee table holding a single ceramic vase. Tall windows with linen curtains, late afternoon north light spilling across the floor. Walls in warm bone with subtle texture. One mid-century armchair upholstered in oat wool. A jute rug. View of birch trees through the window.
-
-### A2 — `lysning-fjordstuen.jpg` (4:5) · both tiers
-
-> Interior of a traditional Norwegian log cabin (laftet tømmerhus) in Hardanger. Exposed dark-stained timber walls, low ceiling, hand-knotted woolen throw on a built-in bench seat. Slate floor. Cast-iron wood stove glowing softly. A small window framing a sliver of fjord and mountain. Brass oil lamp on a side table. Late winter morning light, slightly overexposed highlights for filmic warmth.
-
-### A3 — `lysning-bryggehuset.jpg` (4:5) · both tiers
-
-> Interior of a heritage building on Bryggen in Bergen, repurposed as an 8-room boutique residence. Exposed dark red brick on one wall, lime-washed plaster on the others. Vintage tan leather banquette running along the brick wall, beneath a row of antique brass wall sconces. Wide-plank pine floor, weathered. A long communal oak table with three handcrafted Windsor chairs. Tall industrial windows with thin black mullions, grey morning light from the harbour.
-
-### A4 — `lysning-holmenkollen.jpg` (3:4) · both tiers
-
-> Master bedroom of a contemporary Norwegian family home in Holmenkollen, Oslo. North light through floor-to-ceiling windows. Cream linen bedding on a low oak platform bed, hand-loomed grey wool blanket folded at the foot. A single Nordic sheepskin draped over a vintage oak chair. Hand-loomed wool rug in undyed natural tones. Simple matte black reading lamp. View of pine forest in soft focus through the window.
-
-### A5 — `lysning-hero.jpg` (16:9) · premium only
-
-> Wide editorial interior photograph of a Norwegian boutique design studio's signature living space. Asymmetric composition: a low travertine plinth on the left holding a single ceramic vessel, an oak-framed linen sofa centered, a tall industrial window on the right framing soft north light over a birch grove. Bone-coloured walls, cream undertones, warm clay accents. Hand-loomed wool rug. Late afternoon. Magazine cover-grade, depth of field, soft shadows. Composition leaves negative space on the right third for overlay text.
-
-### A6 — `lysning-atelier.jpg` (1:1) · premium only
-
-> Top-down photograph of an interior designer's working table in a Norwegian atelier. Linen swatches in oat, bone, and clay tones spread across pale oak. A graphite hand-drawing of a floor plan. A small ceramic mug holding pencils. Three cylindrical wood samples (oak, ash, birch). A single sprig of cotton grass. Warm afternoon light from an unseen window. Composition centered but balanced, magazine flat-lay aesthetic, soft natural shadows.
-
-### A7 — `lysning-detail-textile.jpg` (1:1) · premium only
-
-> Macro photograph of hand-loomed Norwegian wool textile from Røros Tweed in a warm oat tone. Visible weave texture, slight irregularities, pulled threads at the edge. A single shaft of late afternoon light raking across the surface. Editorial detail shot for a luxury interior design portfolio. Slightly desaturated, warm undertones. Shallow depth of field.
-
-### A8 — `lysning-detail-oak.jpg` (1:1) · premium only
-
-> Macro photograph of a hand-finished Norwegian oak surface, brushed and oiled to a soft satin sheen. Subtle ray flecks visible, fine grain pattern, one small knot near the bottom edge. Warm directional light from upper left. Editorial detail shot for an interior design portfolio. Restrained natural tone palette, soft contrast.
+> **Quick recipe — do this 8 times, once per A1–A8 below:**
+>
+> 1. Open Whisk → image mode (image icon, top-left tab)
+> 2. Click the **Aspect ratio** button → pick the noted button (SQUARE / PORTRAIT / LANDSCAPE)
+> 3. Copy the entire prompt block (everything between the `>` lines) for the run
+> 4. Paste into "Describe your idea…"
+> 5. Hit the arrow (→)
+> 6. Right-click the result → Save image as… → save to the path(s) listed for that run, with the exact filename
+> 7. Repeat for the next run
+>
+> The aspect ratio is **also embedded in the prompt text** so Whisk's Imagen biases the composition correctly even though Whisk's UI only offers 1:1, 9:16, and 16:9. Don't tweak the prompt text.
 
 ---
 
-## B — Videos (premium tier only — Whisk's image-to-video mode)
+### Run 1 of 8 — `lysning-bjorkely.jpg`
 
-Take the matching seed image generated in section A, paste it into Whisk's image-to-video input, then add the prompt text below.
+- **Whisk aspect button:** **PORTRAIT (9:16)**
+- **Save to:**
+  - `prototypes/classic/public/assets/img/lysning-bjorkely.jpg`
+  - `prototypes/premium/public/assets/img/lysning-bjorkely.jpg`
 
-Whisk current limit: ~8s per clip. Each prompt below targets that.
+> Vertical 3:4 aspect ratio editorial interior photograph of a 1930s Norwegian Funkis villa living room in Bygdøy, Oslo. Oak parquet floor, cream linen sofa with rounded back, low travertine coffee table holding a single ceramic vase. Tall windows with linen curtains, late afternoon north light spilling across the floor. Walls in warm bone with subtle texture. One mid-century armchair upholstered in oat wool. A jute rug. View of birch trees through the window.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Lived-in feel. Hand-loomed wool, oak parquet, linen, brass fixtures. Composition: balanced, asymmetric, magazine-grade (Wallpaper / AD). Avoid HDR, oversaturation, harsh shadows, modern tech aesthetics, lens flare, digital noise. No people in the image.
 
 ---
 
-## V1 — Hero ambient pan (required)
+### Run 2 of 8 — `lysning-fjordstuen.jpg`
 
-- **Seed image:** `prototypes/premium/public/generated/img/lysning-hero.jpg`
-- **Filename:** `lysning-hero-360.mp4`
-- **Aspect:** 16:9
-- **Length:** 8s (loopable)
-- **Whisk prompt:**
-  > Slow steady horizontal camera pan across a Nordic editorial living room interior. The camera glides smoothly from left to right, keeping subjects centered. Late afternoon north light spills through tall windows. Soft, painterly motion — no shake, no zoom. The pan should loop seamlessly: end frame should match start frame as closely as possible. No people, no rapid movement, no glitches. Cinematic, editorial, slow.
+- **Whisk aspect button:** **PORTRAIT (9:16)**
+- **Save to:**
+  - `prototypes/classic/public/assets/img/lysning-fjordstuen.jpg`
+  - `prototypes/premium/public/assets/img/lysning-fjordstuen.jpg`
 
-## V2 — Workshop close-up (optional but premium-feel)
+> Vertical 4:5 aspect ratio interior of a traditional Norwegian log cabin (laftet tømmerhus) in Hardanger. Exposed dark-stained timber walls, low ceiling, hand-knotted woolen throw on a built-in bench seat. Slate floor. Cast-iron wood stove glowing softly. A small window framing a sliver of fjord and mountain. Brass oil lamp on a side table. Late winter morning light, slightly overexposed highlights for filmic warmth.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Lived-in feel. Hand-loomed wool, oak parquet, linen, brass fixtures. Composition: balanced, asymmetric, magazine-grade (Wallpaper / AD). Avoid HDR, oversaturation, harsh shadows, modern tech aesthetics, lens flare, digital noise. No people in the image.
 
-- **Seed image:** `prototypes/premium/public/generated/img/lysning-atelier.jpg`
-- **Filename:** `lysning-atelier-detail.mp4`
-- **Aspect:** 1:1
-- **Length:** 6s
-- **Whisk prompt:**
-  > Slow top-down dolly forward over a Norwegian interior designer's working table covered in linen swatches, pencils, and oak samples. The camera descends gently, like leaning forward to inspect. Late afternoon warm light slowly shifts across the surface. Editorial, slow, magazine-grade. No people, no fast motion.
+---
 
-## V3 — Material detail breathing (optional, for material library section)
+### Run 3 of 8 — `lysning-bryggehuset.jpg`
 
-- **Seed image:** `prototypes/premium/public/generated/img/lysning-detail-textile.jpg`
-- **Filename:** `lysning-textile-loop.mp4`
-- **Aspect:** 1:1
-- **Length:** 4s (looped)
-- **Whisk prompt:**
-  > Extremely subtle motion on a hand-loomed wool textile macro. The light source slowly drifts across the weave, revealing texture detail. The fabric itself does not move. Loopable. No camera movement.
+- **Whisk aspect button:** **PORTRAIT (9:16)**
+- **Save to:**
+  - `prototypes/classic/public/assets/img/lysning-bryggehuset.jpg`
+  - `prototypes/premium/public/assets/img/lysning-bryggehuset.jpg`
+
+> Vertical 4:5 aspect ratio interior of a heritage building on Bryggen in Bergen, repurposed as an 8-room boutique residence. Exposed dark red brick on one wall, lime-washed plaster on the others. Vintage tan leather banquette running along the brick wall, beneath a row of antique brass wall sconces. Wide-plank pine floor, weathered. A long communal oak table with three handcrafted Windsor chairs. Tall industrial windows with thin black mullions, grey morning light from the harbour.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Lived-in feel. Hand-loomed wool, oak parquet, linen, brass fixtures. Composition: balanced, asymmetric, magazine-grade (Wallpaper / AD). Avoid HDR, oversaturation, harsh shadows, modern tech aesthetics, lens flare, digital noise. No people in the image.
+
+---
+
+### Run 4 of 8 — `lysning-holmenkollen.jpg`
+
+- **Whisk aspect button:** **PORTRAIT (9:16)**
+- **Save to:**
+  - `prototypes/classic/public/assets/img/lysning-holmenkollen.jpg`
+  - `prototypes/premium/public/assets/img/lysning-holmenkollen.jpg`
+
+> Vertical 3:4 aspect ratio master bedroom of a contemporary Norwegian family home in Holmenkollen, Oslo. North light through floor-to-ceiling windows. Cream linen bedding on a low oak platform bed, hand-loomed grey wool blanket folded at the foot. A single Nordic sheepskin draped over a vintage oak chair. Hand-loomed wool rug in undyed natural tones. Simple matte black reading lamp. View of pine forest in soft focus through the window.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Lived-in feel. Hand-loomed wool, oak parquet, linen, brass fixtures. Composition: balanced, asymmetric, magazine-grade (Wallpaper / AD). Avoid HDR, oversaturation, harsh shadows, modern tech aesthetics, lens flare, digital noise. No people in the image.
+
+---
+
+### Run 5 of 8 — `lysning-hero.jpg` *(premium only)*
+
+- **Whisk aspect button:** **LANDSCAPE (16:9)**
+- **Save to:**
+  - `prototypes/premium/public/assets/img/lysning-hero.jpg`
+
+> Horizontal 16:9 aspect ratio wide editorial interior photograph of a Norwegian boutique design studio's signature living space. Asymmetric composition: a low travertine plinth on the left holding a single ceramic vessel, an oak-framed linen sofa centered, a tall industrial window on the right framing soft north light over a birch grove. Bone-coloured walls, cream undertones, warm clay accents. Hand-loomed wool rug. Late afternoon. Magazine cover-grade, depth of field, soft shadows. Composition leaves negative space on the right third for overlay text.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Lived-in feel. Hand-loomed wool, oak parquet, linen, brass fixtures. Composition: balanced, asymmetric, magazine-grade (Wallpaper / AD). Avoid HDR, oversaturation, harsh shadows, modern tech aesthetics, lens flare, digital noise. No people in the image.
+
+---
+
+### Run 6 of 8 — `lysning-atelier.jpg` *(premium only)*
+
+- **Whisk aspect button:** **SQUARE (1:1)**
+- **Save to:**
+  - `prototypes/premium/public/assets/img/lysning-atelier.jpg`
+
+> Square 1:1 aspect ratio top-down photograph of an interior designer's working table in a Norwegian atelier. Linen swatches in oat, bone, and clay tones spread across pale oak. A graphite hand-drawing of a floor plan. A small ceramic mug holding pencils. Three cylindrical wood samples (oak, ash, birch). A single sprig of cotton grass. Warm afternoon light from an unseen window. Composition centered but balanced, magazine flat-lay aesthetic, soft natural shadows.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Lived-in feel. Hand-loomed wool, oak parquet, linen, brass fixtures. Composition: balanced, asymmetric, magazine-grade (Wallpaper / AD). Avoid HDR, oversaturation, harsh shadows, modern tech aesthetics, lens flare, digital noise. No people in the image.
+
+---
+
+### Run 7 of 8 — `lysning-detail-textile.jpg` *(premium only)*
+
+- **Whisk aspect button:** **SQUARE (1:1)**
+- **Save to:**
+  - `prototypes/premium/public/assets/img/lysning-detail-textile.jpg`
+
+> Square 1:1 aspect ratio macro photograph of hand-loomed Norwegian wool textile from Røros Tweed in a warm oat tone. Visible weave texture, slight irregularities, pulled threads at the edge. A single shaft of late afternoon light raking across the surface. Editorial detail shot for a luxury interior design portfolio. Slightly desaturated, warm undertones. Shallow depth of field.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Avoid HDR, oversaturation, harsh shadows, lens flare, digital noise.
+
+---
+
+### Run 8 of 8 — `lysning-detail-oak.jpg` *(premium only)*
+
+- **Whisk aspect button:** **SQUARE (1:1)**
+- **Save to:**
+  - `prototypes/premium/public/assets/img/lysning-detail-oak.jpg`
+
+> Square 1:1 aspect ratio macro photograph of a hand-finished Norwegian oak surface, brushed and oiled to a soft satin sheen. Subtle ray flecks visible, fine grain pattern, one small knot near the bottom edge. Warm directional light from upper left. Editorial detail shot for an interior design portfolio. Restrained natural tone palette, soft contrast.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Avoid HDR, oversaturation, harsh shadows, lens flare, digital noise.
+
+---
+
+## B — Videos (premium tier only · 3 Whisk runs)
+
+> **Quick recipe — image-to-video mode:**
+>
+> 1. Switch Whisk to **video** mode (camera icon, top-right of the prompt area)
+> 2. Click the SCENE slot → upload the seed image listed for the run
+> 3. Click the **Aspect ratio** button → pick the noted button
+> 4. Paste the prompt block into the text field
+> 5. Hit the arrow (→). Whisk caps clips at ~8s
+> 6. Right-click the result → Save video as… → save to the path listed
+>
+> Run 1 (hero) is **required for the premium tier**. Runs 2 and 3 are optional polish.
+
+---
+
+### Run 1 of 3 — `lysning-hero-360.mp4` *(required)*
+
+- **Whisk aspect button:** **LANDSCAPE (16:9)**
+- **Seed image:** `prototypes/premium/public/assets/img/lysning-hero.jpg`
+- **Save to:** `prototypes/premium/public/generated/videos/lysning-hero-360.mp4`
+- **Target length:** 8s (loopable)
+
+> Slow steady horizontal camera pan across a Nordic editorial living room interior. The camera glides smoothly from left to right, keeping subjects centered. Late afternoon north light spills through tall windows. Soft, painterly motion — no shake, no zoom. The pan should loop seamlessly: end frame should match start frame as closely as possible. No people, no rapid movement, no glitches. Cinematic, editorial, slow.
+
+---
+
+### Run 2 of 3 — `lysning-atelier-detail.mp4` *(optional)*
+
+- **Whisk aspect button:** **SQUARE (1:1)**
+- **Seed image:** `prototypes/premium/public/assets/img/lysning-atelier.jpg`
+- **Save to:** `prototypes/premium/public/generated/videos/lysning-atelier-detail.mp4`
+- **Target length:** 6s
+
+> Slow top-down dolly forward over a Norwegian interior designer's working table covered in linen swatches, pencils, and oak samples. The camera descends gently, like leaning forward to inspect. Late afternoon warm light slowly shifts across the surface. Editorial, slow, magazine-grade. No people, no fast motion.
+
+---
+
+### Run 3 of 3 — `lysning-textile-loop.mp4` *(optional)*
+
+- **Whisk aspect button:** **SQUARE (1:1)**
+- **Seed image:** `prototypes/premium/public/assets/img/lysning-detail-textile.jpg`
+- **Save to:** `prototypes/premium/public/generated/videos/lysning-textile-loop.mp4`
+- **Target length:** 4s (looped)
+
+> Extremely subtle motion on a hand-loomed wool textile macro. The light source slowly drifts across the weave, revealing texture detail. The fabric itself does not move. Loopable. No camera movement.
 
 ---
 
