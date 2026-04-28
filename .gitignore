@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
-/.pnp
+# dependencies (any depth — applies to root + each prototype)
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -11,14 +11,14 @@
 !.yarn/versions
 
 # testing
-/coverage
+coverage/
 
 # next.js
-/.next/
-/out/
+.next/
+out/
 
 # production
-/build
+build/
 
 # misc
 .DS_Store
@@ -40,14 +40,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local-only screenshots, mcp scratch, and AI-generated assets that shouldn't ship in git
-/.playwright-mcp/
-/_local/
-/public/generated/
+# local-only screenshots, mcp scratch, AI-generated assets — gitignored anywhere in the tree
+.playwright-mcp/
+_local/
+public/generated/
 *.jpeg
 
-# allow tracked imagery under public/assets/img to remain
-!public/assets/img/*.jpeg
+# allow tracked imagery under any public/assets/img to remain
+!**/public/assets/img/*.jpeg
 
 # Claude Code per-developer settings
 .claude/settings.local.json

@@ -1,43 +1,47 @@
 @AGENTS.md
 
-# Project Conventions — Interior Atelier
+# Interior Atelier — Monorepo Conventions
 
-## Imagery
+This repo holds **two demo websites** for Lysning Studio (a fictional Norwegian interior-design studio in Orkanger). They are templates we pitch at three price points to real interior designers in Norway.
 
-All project imagery lives in [public/assets/img/](public/assets/img/). Reference it from components as an absolute URL:
+| Folder | Tier | Price | Status |
+|---|---|---|---|
+| [prototypes/classic/](prototypes/classic/) | Classic | NOK 9,999 | v1 |
+| [prototypes/premium/](prototypes/premium/) | Premium | NOK 19,999 | v1 |
+| *(future)* | Ultra Premium | NOK 34,999 | deferred |
 
-```tsx
-<Image src="/assets/img/maison-riviere.jpg" alt="…" fill />
-```
+When working **inside a prototype**, follow that prototype's [CLAUDE.md](prototypes/premium/CLAUDE.md). Conventions below apply across the whole monorepo.
 
-- **Do not** use remote image URLs (Unsplash, CDNs, etc.) in components. If you need a new photo, drop the file in `public/assets/img/` and link it locally.
-- **Do not** add entries to `next.config.ts` `images.remotePatterns` — the config is intentionally empty. Keeping imagery local means no hotlink surprises, deterministic builds, and full offline dev.
-- Filenames should be **semantic and kebab-case** — matching the project or section they belong to (`maison-riviere.jpg`, `charlwood-house.jpg`), not the source ID.
-- Prefer `<Image fill />` inside an explicitly sized parent; provide a meaningful `sizes` prop for responsive loading.
-- Place any SVGs/icons that aren't covered by `@phosphor-icons/react` under `public/assets/img/` as well.
+## Brand identity
 
-## Folder layout
+- **Single source of truth:** [shared/brand.ts](shared/brand.ts). Never hard-code the studio name, address, founder, year, phone, or email in components — always import from `@shared/brand`.
+- **Norwegian copy:** [shared/copy/no.ts](shared/copy/no.ts). Bokmål default. English variant (`en.ts`) deferred to v2 of the premium tier.
+- **Demo brand:** Lysning Studio · Ingvild Lysne · Orkdalsveien 47, 7300 Orkanger · est. 2018.
+- When forking a prototype for a real customer, the only file that should need editing for identity changes is `shared/brand.ts` (and asset filenames).
 
-```
-public/
-  assets/
-    img/            ← all raster + bespoke SVG imagery
-  *.svg             ← Next.js starter glyphs (safe to remove when unused)
-src/
-  app/              ← App Router entry, layout.tsx, globals.css
-  components/       ← Section components (PascalCase.tsx)
-```
+## Imagery & video
 
-## Fonts & design tokens
+- Curated stills committed under `prototypes/<tier>/public/assets/img/` (per-prototype, semantic kebab-case filenames).
+- AI-generated assets land in `prototypes/<tier>/public/generated/` — **gitignored** and reproducible from versioned prompts in [scripts/prompts/](scripts/prompts/).
+- Image generation (Nano Banana / Gemini Flash Image) is automated via [scripts/generate-images.ts](scripts/generate-images.ts). Requires `GEMINI_API_KEY` in `.env`.
+- Video generation is **manual** via Whisk (labs.google) — prompts collected in [scripts/whisk-prompts.md](scripts/whisk-prompts.md). User runs them, drops MP4s into `prototypes/<tier>/public/generated/videos/`.
 
-- Fonts are loaded via `next/font/google` in [src/app/layout.tsx](src/app/layout.tsx) — `Cormorant_Garamond` for display, `Inter` for body. Do not inline `<link>` tags for Google Fonts.
-- All colour, spacing, and typographic tokens live in [src/app/globals.css](src/app/globals.css) under `:root` and `@theme inline` (Tailwind v4). Add new tokens there rather than hard-coding hex values in components.
+## Language
 
-## Motion
+- All copy in **Norwegian Bokmål**. No mixed Norwegian/English UI in v1.
+- Premium tier reserves space for an EN toggle (visible button, non-functional in v1). Translations land in `shared/copy/en.ts` per real-client engagement.
 
-- `framer-motion` is the only animation library. Any component using it **must** start with `"use client"`.
-- Reuse the shared easing tuple `const ease = [0.22, 1, 0.36, 1] as const;` for consistency across sections.
+## Attribution rule
 
-## Attribution
+Every footer / "built by" surface credits **Bithun** ("Utviklet av Bithun" / "Developed by Bithun"). Never introduce AI-tool attribution anywhere — code, comments, commits, or PR descriptions.
 
-Footer and any "built by" surface must credit **Bithun** ("Developed by Bithun" / "Utviklet av Bithun"). Do not introduce AI-tool attribution anywhere in the codebase.
+## Adding a new prototype variant
+
+1. `cp -r prototypes/premium prototypes/<new-tier>` (or from `classic` if lower-end)
+2. Update its `CLAUDE.md` and `package.json#name`
+3. Override anything tier-specific in the new copy
+4. Add a new Vercel project pointing at `prototypes/<new-tier>/`
+
+## Adding a new real-customer site
+
+Future agents: see [scripts/customer-fork.md](scripts/customer-fork.md) for the cloning workflow.
