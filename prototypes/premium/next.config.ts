@@ -7,9 +7,11 @@ const here = dirname(fileURLToPath(import.meta.url));
 const nextConfig: NextConfig = {
   /* All imagery is served locally from /public/assets/img — no remote patterns needed. */
   turbopack: {
-    // Silence "multiple lockfiles" warning. The premium prototype is its own
-    // self-contained app — workspace root is this folder, not the monorepo root.
-    root: resolve(here),
+    // The monorepo root is two levels up (interior-atelier/). We set it
+    // explicitly so Turbopack doesn't infer the wrong workspace from sibling
+    // lockfiles AND so path aliases like `@shared/*` (which live at the
+    // monorepo root, outside this prototype folder) can resolve correctly.
+    root: resolve(here, "..", ".."),
   },
 };
 
