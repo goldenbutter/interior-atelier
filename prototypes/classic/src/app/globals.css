@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+:root {
+  --bone: #f4efe6;
+  --cream: #ebe3d3;
+  --sand: #d8cdb8;
+  --clay: #b08666;
+  --clay-deep: #8a6448;
+  --charcoal: #1a1815;
+  --graphite: #2c2824;
+  --stone: #7a736a;
+  --ash: #b4aca0;
+  --line: rgba(26, 24, 21, 0.12);
+  --line-strong: rgba(26, 24, 21, 0.24);
+
+  --background: var(--bone);
+  --foreground: var(--charcoal);
+
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-bone: var(--bone);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-clay: var(--clay);
+  --color-clay-deep: var(--clay-deep);
+  --color-charcoal: var(--charcoal);
+  --color-graphite: var(--graphite);
+  --color-stone: var(--stone);
+  --color-ash: var(--ash);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "ss03", "cv11";
+  letter-spacing: -0.005em;
+}
+
+::selection {
+  background: var(--charcoal);
+  color: var(--bone);
+}
+
+.font-display {
+  font-family: var(--font-cormorant), ui-serif, Georgia, serif;
+  font-feature-settings: "liga", "dlig", "ss01";
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.eyebrow {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--stone);
+}
+
+.hairline {
+  height: 1px;
+  background: var(--line-strong);
+  width: 100%;
+}
+
+/* Editorial film-grain — fixed, pointer-events-none */
+.grain-overlay {
+  background-image:
+    radial-gradient(rgba(26, 24, 21, 0.18) 1px, transparent 1px),
+    radial-gradient(rgba(26, 24, 21, 0.08) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  mix-blend-mode: multiply;
+  opacity: 0.14;
+}
+
+/* === Reveal-on-scroll: simple IntersectionObserver-driven entrance === */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 700ms var(--ease-soft), transform 700ms var(--ease-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform, opacity;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Gallery accordion (Elvebooking pattern) === */
+.gallery-selector {
+  display: grid;
+  grid-template-columns: repeat(var(--gallery-count, 4), 1fr);
+  gap: 0.5rem;
+  height: clamp(20rem, 60vh, 36rem);
+  width: 100%;
+}
+.gallery-selector .gallery-option {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: flex-grow 700ms var(--ease-soft), opacity 600ms var(--ease-soft),
+    transform 700ms var(--ease-soft);
+  display: flex;
+  align-items: stretch;
+}
+.gallery-selector.has-animation .gallery-option {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.gallery-selector.has-animation .gallery-option.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (min-width: 768px) {
+  .gallery-selector {
+    grid-template-columns: repeat(var(--gallery-count, 4), minmax(0, 1fr));
+    grid-auto-flow: column;
+  }
+  .gallery-selector:has(.gallery-option.active) {
+    grid-template-columns: repeat(var(--gallery-count, 4), minmax(0, 0.6fr));
+  }
+  .gallery-selector .gallery-option.active {
+    grid-column: span 2;
+  }
+}
+.gallery-selector .gallery-option-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(0.96);
+  transition: filter 600ms var(--ease-soft), transform 800ms var(--ease-soft);
+}
+.gallery-selector .gallery-option.active .gallery-option-img {
+  filter: saturate(1) contrast(1);
+  transform: scale(1.02);
+}
+.gallery-selector .gallery-option-cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(to top, rgba(26, 24, 21, 0.55), transparent);
+  color: var(--bone);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 500ms var(--ease-soft), transform 600ms var(--ease-soft);
+}
+.gallery-selector .gallery-option.active .gallery-option-cap {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 767px) {
+  .gallery-selector {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 14rem;
+    height: auto;
+  }
+  .gallery-selector .gallery-option,
+  .gallery-selector .gallery-option.active {
+    grid-column: 1 / -1;
+  }
+  .gallery-selector .gallery-option-cap {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Photo grid (about-page pattern, monochrome → colour on hover) === */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 12rem;
+  gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .photo-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 14rem;
+  }
+}
+.photo-grid .photo-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+.photo-grid .photo-item--tall {
+  grid-row: span 2;
+}
+.photo-grid .photo-item--wide {
+  grid-column: span 2;
+}
+.photo-grid .photo-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.85) saturate(0.7);
+  transition: filter 700ms var(--ease-soft), transform 1000ms var(--ease-soft);
+}
+.photo-grid .photo-item:hover img {
+  filter: grayscale(0) saturate(1);
+  transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .gallery-selector .gallery-option-img,
+  .photo-grid .photo-item img {
+    transition: none;
+  }
+}
