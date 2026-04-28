@@ -51,7 +51,8 @@ Both `prototypes/classic/next.config.ts` and `prototypes/premium/next.config.ts`
 - Premium boots cleanly at http://localhost:3000: ✅ `GET / 200 in 4.2s` (initial compile), ~150ms warm. Norwegian copy (`Stille rom som husker.`, `Lysning Studio`, `Orkanger`, `Ingvild`) all render — confirms `@shared/brand` and `@shared/copy/no` resolve at runtime
 - Classic boots cleanly at http://localhost:3001: ✅ `GET / 200 in 3.6s` (initial compile), ~100–180ms warm. Same shared content renders
 - Screenshots saved to: [`docs/screenshots/pc2-premium-homepage.png`](../../docs/screenshots/pc2-premium-homepage.png) and [`docs/screenshots/pc2-classic-homepage.png`](../../docs/screenshots/pc2-classic-homepage.png) (committed in `542728c`)
-- Pushed at SHA: _to be filled in after final push_
+- Screenshot tooling: no Playwright MCP available in this harness, so used **Microsoft Edge headless** (`msedge.exe --headless=new --screenshot=...`) as a manual fallback. Note for future PC2-style handoffs: the second concurrent Edge invocation needs an isolated `--user-data-dir` or it silently fails to write its output. Use a per-run temp profile dir.
+- Pushed at SHAs: `542728c` (screenshots) → `ca51054` (this log entry, pre-fill) → tip after fill commit (see `git log --oneline -5` after pull)
 - Anything unexpected:
   - Premium dev log shows a 404 for `/generated/videos/lysning-hero-360.mp4` on every page load — expected, the Whisk hero video is generated manually by Bithun and dropped in later. Hero falls back gracefully (no runtime crash, layout still renders).
   - Premium dev log emits a framer-motion advisory: `[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.` Cosmetic; the scroll-explode hero in `Hero.tsx` may want an explicit `position` on whichever element it tracks. Not blocking. Worth a 2-line follow-up later.
