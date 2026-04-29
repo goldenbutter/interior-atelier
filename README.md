@@ -41,7 +41,7 @@ Each tier is a self-contained Next.js 16 app deployed to its own Vercel project,
 
 **Classic** leans editorial-quiet: no `framer-motion`, a single IntersectionObserver-driven reveal hook, an Elvebooking-style accordion gallery, monochrome-to-colour philosophy hover, a small set of sections (hero, philosophy, services, projects, process, contact), simple fully-static cards.
 
-**Premium** leans flagship: scroll-driven hero "explode" effect with a Whisk-generated 360° pan video underneath, "Doppelrand" double-bezel framing, magnetic CTA buttons, press marquee, six-tile material library bento, testimonials wall, a stylised SVG service-area map of Trøndelag, language-toggle placeholder in the nav. Uses `framer-motion` throughout.
+**Premium** leans flagship: scroll-driven hero "explode" effect over a static editorial still that breathes with a slow ambient scale-and-drift, "Doppelrand" double-bezel framing, magnetic CTA buttons, press marquee, seven-tile material library (six material macros + one wide context shot), monochrome-to-colour project cards (hover desktop, tap-with-2s-revert mobile), testimonials wall, stylised SVG service-area map of Trøndelag, language-toggle placeholder in the nav, floating glass mobile menu. Uses `framer-motion` throughout.
 
 Both share the same fictional brand identity, Norwegian copy, fonts (Cormorant Garamond + Geist + Geist Mono), and the same Doppelrand colour palette (bone, cream, clay, charcoal, graphite, stone).
 
@@ -51,7 +51,7 @@ Both share the same fictional brand identity, Norwegian copy, fonts (Cormorant G
 - **Motion:** `framer-motion` 12 (premium only) · IntersectionObserver-driven CSS reveal (classic)
 - **Icons:** `@phosphor-icons/react`
 - **Typography:** Cormorant Garamond (display) · Geist (body) · Geist Mono (editorial), all via `next/font/google`
-- **Imagery:** curated stills generated via Whisk (labs.google) and Nano Banana (Gemini 2.5 Flash Image); 360° hero pan video via Whisk image-to-video; chroma-keyed badge logo via Sharp + flood-fill
+- **Imagery:** curated stills generated via Whisk (labs.google) and Nano Banana (Gemini 2.5 Flash Image); chroma-keyed badge logo via Sharp + flood-fill. A premium hero video via Whisk image-to-video is documented in `scripts/whisk-prompts.md` for future iterations but is not wired into v1 — the v1 hero uses a static still with a CSS ambient-breathing animation
 - **Hosting:** two Vercel projects, both connected to this GitHub repo with Root Directory pinned per prototype and "Skip deployments when no changes to root" enabled — pushing classic-only changes never rebuilds premium
 
 ## Local dev
