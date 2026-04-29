@@ -196,7 +196,7 @@ export default function Hero() {
             style={{ opacity: cardOpacity }}
             className="absolute -left-6 bottom-24 hidden w-56 rounded-[1.25rem] bg-charcoal/[0.04] p-1.5 ring-1 ring-charcoal/10 shadow-[0_30px_80px_-30px_rgba(26,24,21,0.45)] lg:block"
           >
-            <div className="bezel-inner rounded-[calc(1.25rem-0.375rem)] bg-bone/35 px-5 py-5 backdrop-blur-2xl backdrop-saturate-150">
+            <div className="bezel-inner rounded-[calc(1.25rem-0.375rem)] bg-bone px-5 py-5">
               <div className="flex items-center gap-1 text-clay">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} size={11} weight="fill" />
