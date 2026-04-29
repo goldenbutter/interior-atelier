@@ -155,9 +155,13 @@ export default function Navigation() {
               className="fixed right-4 top-[5.5rem] z-[61] w-72 origin-top-right overflow-hidden rounded-2xl border border-charcoal/10 bg-bone/55 text-charcoal shadow-[0_30px_80px_-20px_rgba(26,24,21,0.35)] backdrop-blur-2xl backdrop-saturate-150 lg:hidden"
             >
               <div className="flex items-center justify-between border-b border-charcoal/10 px-5 py-3">
-                <span className="font-display text-base tracking-tight">
+                <a
+                  href="#top"
+                  onClick={() => setOpen(false)}
+                  className="font-display text-base tracking-tight transition-colors hover:text-clay-deep"
+                >
                   {brand.name}
-                </span>
+                </a>
                 <button
                   type="button"
                   aria-label="Lukk meny"
