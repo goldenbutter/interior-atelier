@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { brand } from "@shared/brand";
 import "./globals.css";
 
@@ -72,6 +73,7 @@ export default function RootLayout({
       <body className="relative min-h-full flex flex-col bg-bone text-charcoal selection:bg-charcoal selection:text-bone">
         {children}
         <div aria-hidden className="grain-overlay pointer-events-none fixed inset-0 z-[60]" />
+        <Analytics />
       </body>
     </html>
   );

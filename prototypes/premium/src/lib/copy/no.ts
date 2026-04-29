@@ -135,6 +135,16 @@ export const copyNo = {
         image: "/assets/img/lysning-holmenkollen.jpg",
         tall: true,
       },
+      {
+        no: "05",
+        slug: "solhogda",
+        title: "Solhøgda",
+        location: "Frogner, Oslo",
+        year: "2024",
+        type: "Bygård · Komplett restaurering",
+        image: "/assets/img/lysning-solhogda.jpg",
+        wide: true,
+      },
     ],
   },
 

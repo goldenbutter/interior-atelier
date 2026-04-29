@@ -41,6 +41,12 @@ export default function Projects() {
         <div className="mt-20 grid grid-cols-1 gap-x-8 gap-y-24 md:grid-cols-2 lg:gap-x-12">
           {projects.map((p, i) => {
             const isTall = "tall" in p && p.tall === true;
+            const isWide = "wide" in p && p.wide === true;
+            const aspectClass = isWide
+              ? "aspect-[16/9]"
+              : isTall
+                ? "aspect-[3/4]"
+                : "aspect-[4/5]";
             return (
             <motion.a
               key={p.no}
@@ -49,12 +55,12 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 1, delay: (i % 2) * 0.12, ease }}
-              className={`group block ${i % 2 === 1 ? "md:mt-20" : ""}`}
+              className={`group block ${
+                isWide ? "md:col-span-2" : i % 2 === 1 ? "md:mt-20" : ""
+              }`}
             >
               <div
-                className={`relative rounded-[1.75rem] bg-charcoal/[0.04] p-1.5 ring-1 ring-charcoal/10 transition-shadow duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:shadow-[0_40px_90px_-40px_rgba(26,24,21,0.45)] ${
-                  isTall ? "aspect-[3/4]" : "aspect-[4/5]"
-                }`}
+                className={`relative rounded-[1.75rem] bg-charcoal/[0.04] p-1.5 ring-1 ring-charcoal/10 transition-shadow duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:shadow-[0_40px_90px_-40px_rgba(26,24,21,0.45)] ${aspectClass}`}
               >
                 <div className="bezel-inner relative h-full w-full overflow-hidden rounded-[calc(1.75rem-0.375rem)] bg-cream">
                   <motion.div
@@ -66,7 +72,11 @@ export default function Projects() {
                       src={p.image}
                       alt={p.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, 45vw"
+                      sizes={
+                        isWide
+                          ? "(max-width: 768px) 100vw, 92vw"
+                          : "(max-width: 768px) 100vw, 45vw"
+                      }
                       className="object-cover"
                     />
                   </motion.div>

@@ -93,26 +93,6 @@ body {
   opacity: 0.14;
 }
 
-/* === Hero "breathing" float — replaces a hero video with a subtle ambient drift === */
-@keyframes hero-float {
-  0%, 100% {
-    transform: scale(1.04) translate3d(0, 0, 0);
-  }
-  50% {
-    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
-  }
-}
-.hero-float {
-  animation: hero-float 22s ease-in-out infinite;
-  transform-origin: 60% 55%;
-  will-change: transform;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-float {
-    animation: none;
-  }
-}
-
 /* === Reveal-on-scroll: simple IntersectionObserver-driven entrance === */
 .reveal {
   opacity: 0;

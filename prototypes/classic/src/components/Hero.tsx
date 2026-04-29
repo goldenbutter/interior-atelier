@@ -70,16 +70,14 @@ export default function Hero() {
           style={{ ["--reveal-delay" as string]: "180ms" }}
         >
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-cream lg:aspect-auto lg:h-full">
-            <div className="hero-float absolute inset-0">
-              <Image
-                src="/assets/img/lysning-hero.jpg"
-                alt={`${brand.name} — utvalgt prosjekt`}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover"
-              />
-            </div>
+            <Image
+              src="/assets/img/lysning-hero.jpg"
+              alt={`${brand.name} — utvalgt prosjekt`}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover"
+            />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/55 via-charcoal/15 to-transparent p-6">
               <p className="eyebrow text-bone/85">Utvalgt · 2025</p>
               <p className="mt-1 font-display text-2xl text-bone">
