@@ -11,6 +11,7 @@
  */
 
 import sharp from "sharp";
+import pngToIco from "png-to-ico";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,11 +20,19 @@ const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "..");
 const sourceLogo = resolve(repoRoot, "scripts/assets/lysning-logo-source.png");
 
-const targets = [
+const pngTargets = [
   "prototypes/classic/src/app/icon.png",
   "prototypes/classic/public/assets/img/lysning-logo.png",
   "prototypes/premium/src/app/icon.png",
   "prototypes/premium/public/assets/img/lysning-logo.png",
+].map((p) => resolve(repoRoot, p));
+
+// favicon.ico is what Vercel's dashboard scraper, link-preview crawlers, and
+// some legacy browsers fetch by default. Modern browsers prefer the PNG
+// served at /icon by Next.js, but having both maximises compatibility.
+const icoTargets = [
+  "prototypes/classic/src/app/favicon.ico",
+  "prototypes/premium/src/app/favicon.ico",
 ].map((p) => resolve(repoRoot, p));
 
 // Colour distance threshold. A pixel within TOLERANCE of the sampled corner
@@ -116,8 +125,28 @@ const outBuffer = await sharp(pixels, {
   .png({ compressionLevel: 9 })
   .toBuffer();
 
-for (const target of targets) {
+for (const target of pngTargets) {
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, outBuffer);
+  console.log(`[remove-bg] wrote ${target}`);
+}
+
+// Generate the multi-resolution favicon.ico from the cleaned PNG. We render
+// 16, 32, 48 px square buffers and let png-to-ico pack them into one file —
+// browsers and dashboard scrapers pick the right size for their context.
+const icoSizes = [16, 32, 48];
+const sizedPngBuffers = await Promise.all(
+  icoSizes.map((size) =>
+    sharp(outBuffer)
+      .resize(size, size, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .png()
+      .toBuffer(),
+  ),
+);
+const icoBuffer = await pngToIco(sizedPngBuffers);
+
+for (const target of icoTargets) {
+  mkdirSync(dirname(target), { recursive: true });
+  writeFileSync(target, icoBuffer);
   console.log(`[remove-bg] wrote ${target}`);
 }

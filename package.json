@@ -12,6 +12,7 @@
     "dev:classic": "npm --prefix prototypes/classic run dev"
   },
   "devDependencies": {
+    "png-to-ico": "^3.0.1",
     "sharp": "^0.34.5",
     "tsx": "^4.19.0"
   }
