@@ -5,10 +5,18 @@ import { motion } from "framer-motion";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Six dedicated material macros — each tile shows the labelled material at
-// macro range. Generated via the prompts in scripts/whisk-prompts.md sections
-// A and C. For per-client builds, regenerate with the studio's actual palette.
-const samples = [
+// Six dedicated material macros plus one wide context shot showing the same
+// materials assembled in a real interior. Generated via the prompts in
+// scripts/whisk-prompts.md sections A and C. For per-client builds, regenerate
+// with the studio's actual palette.
+type Sample = {
+  label: string;
+  sub: string;
+  image: string;
+  wide?: boolean;
+};
+
+const samples: Sample[] = [
   {
     label: "Røros Tweed · Oat",
     sub: "Hand-vevd ull · 480 g/m²",
@@ -38,6 +46,12 @@ const samples = [
     label: "Skinn · Vegetabilsk",
     sub: "Italiensk · cognac",
     image: "/assets/img/lysning-detail-skinn.jpg",
+  },
+  {
+    label: "Bjørkely · Sammensatt",
+    sub: "Stue · materialer i kontekst",
+    image: "/assets/img/lysning-hero.jpg",
+    wide: true,
   },
 ];
 
@@ -73,14 +87,24 @@ export default function MaterialLibrary() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7, delay: i * 0.06, ease }}
-                className="group rounded-[1.25rem] bg-charcoal/[0.04] p-1.5 ring-1 ring-charcoal/10 transition-shadow duration-700 hover:shadow-[0_25px_60px_-30px_rgba(26,24,21,0.35)]"
+                className={`group rounded-[1.25rem] bg-charcoal/[0.04] p-1.5 ring-1 ring-charcoal/10 transition-shadow duration-700 hover:shadow-[0_25px_60px_-30px_rgba(26,24,21,0.35)] ${
+                  s.wide ? "col-span-2 sm:col-span-3" : ""
+                }`}
               >
-                <div className="bezel-inner relative aspect-square overflow-hidden rounded-[calc(1.25rem-0.375rem)] bg-cream">
+                <div
+                  className={`bezel-inner relative overflow-hidden rounded-[calc(1.25rem-0.375rem)] bg-cream ${
+                    s.wide ? "aspect-[16/9]" : "aspect-square"
+                  }`}
+                >
                   <Image
                     src={s.image}
                     alt={s.label}
                     fill
-                    sizes="(max-width: 768px) 50vw, 24vw"
+                    sizes={
+                      s.wide
+                        ? "(max-width: 768px) 100vw, 60vw"
+                        : "(max-width: 768px) 50vw, 24vw"
+                    }
                     className="object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
                   />
                 </div>

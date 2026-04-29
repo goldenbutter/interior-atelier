@@ -133,65 +133,61 @@ export default function Navigation() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-charcoal text-bone lg:hidden"
-          >
-            <div className="flex h-20 items-center justify-between px-6">
-              <span className="flex items-center gap-3">
-                <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-bone">
-                  <Image
-                    src="/assets/img/lysning-logo.png"
-                    alt={`${brand.name} monogram`}
-                    width={36}
-                    height={36}
-                    className="h-full w-full object-contain"
-                  />
-                </span>
-                <span className="font-display text-xl tracking-tight">
+          <>
+            <motion.button
+              type="button"
+              aria-label="Lukk meny"
+              onClick={() => setOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[60] bg-charcoal/25 backdrop-blur-[2px] lg:hidden"
+            />
+            <motion.aside
+              initial={{ y: -16, opacity: 0, scale: 0.96 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -16, opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Hovedmeny"
+              className="fixed right-4 top-[5.5rem] z-[61] w-72 origin-top-right overflow-hidden rounded-2xl border border-charcoal/10 bg-bone/55 text-charcoal shadow-[0_30px_80px_-20px_rgba(26,24,21,0.35)] backdrop-blur-2xl backdrop-saturate-150 lg:hidden"
+            >
+              <div className="flex items-center justify-between border-b border-charcoal/10 px-5 py-3">
+                <span className="font-display text-base tracking-tight">
                   {brand.name}
                 </span>
-              </span>
-              <button
-                type="button"
-                aria-label="Lukk meny"
-                onClick={() => setOpen(false)}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-bone/30"
-              >
-                <X size={20} weight="thin" />
-              </button>
-            </div>
-            <nav className="flex flex-col gap-2 px-6 pt-12">
-              {links.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
+                <button
+                  type="button"
+                  aria-label="Lukk meny"
                   onClick={() => setOpen(false)}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.1 + i * 0.06,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="border-b border-bone/10 py-5 font-display text-4xl tracking-tight"
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-charcoal/20 bg-bone/40 text-charcoal transition-colors hover:bg-bone/70"
                 >
-                  {link.label}
-                </motion.a>
-              ))}
-            </nav>
-            <div className="absolute bottom-10 left-6 right-6">
-              <p className="eyebrow text-bone/60">{copyNo.contact.studioLabel}</p>
-              <p className="mt-3 text-sm text-bone/80">
-                {brand.address.street}
-                <br />
-                {brand.address.postalCode} {brand.address.city}, {brand.address.region}
-              </p>
-            </div>
-          </motion.div>
+                  <X size={14} weight="thin" />
+                </button>
+              </div>
+              <nav className="flex flex-col py-2">
+                {links.map((link, i) => (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    initial={{ opacity: 0, x: 12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.35,
+                      delay: 0.08 + i * 0.04,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="px-5 py-3 font-display text-lg tracking-tight transition-colors hover:bg-charcoal/[0.04] hover:text-clay-deep"
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+              </nav>
+            </motion.aside>
+          </>
         )}
       </AnimatePresence>
     </>
