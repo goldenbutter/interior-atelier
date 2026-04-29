@@ -23,12 +23,16 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
+const siteUrl = `https://${brand.domains.premium}`;
+const siteDescription = `Et lite atelier som former private hjem og vernede bygg ved Orkdalsfjorden. ${brand.tagline}`;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${brand.name} — Interiørarkitektur i Trøndelag`,
     template: `%s · ${brand.name}`,
   },
-  description: `Et lite atelier som former private hjem og vernede bygg ved Orkdalsfjorden. ${brand.tagline}`,
+  description: siteDescription,
   keywords: [
     "interiørarkitekt",
     "interiørdesign",
@@ -41,10 +45,26 @@ export const metadata: Metadata = {
   authors: [{ name: "Bithun" }],
   creator: "Bithun",
   openGraph: {
-    title: brand.name,
-    description: brand.tagline,
+    title: `${brand.name} — Interiørarkitektur i Trøndelag`,
+    description: siteDescription,
+    url: siteUrl,
+    siteName: brand.name,
     type: "website",
     locale: "nb_NO",
+    images: [
+      {
+        url: "/assets/img/lysning-hero.jpg",
+        width: 2400,
+        height: 1340,
+        alt: `${brand.name} — Bjørkely-villaen, Bygdøy`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${brand.name} — Interiørarkitektur i Trøndelag`,
+    description: siteDescription,
+    images: ["/assets/img/lysning-hero.jpg"],
   },
 };
 

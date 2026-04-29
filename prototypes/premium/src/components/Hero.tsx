@@ -17,12 +17,11 @@ const ease = [0.22, 1, 0.36, 1] as const;
 /**
  * Premium-tier signature: scroll-driven hero "explode".
  *
- * Headline words scatter outward as the user scrolls, while the Whisk-generated
- * 360° pan video continues underneath. Reassembles on scroll-up.
- *
- * Video source: /generated/videos/lysning-hero-360.mp4 (gitignored, generated
- * manually via Whisk per scripts/whisk-prompts.md). Falls back to the static
- * hero image when the video is missing — the <video> poster handles that.
+ * Headline words scatter outward as the user scrolls. Underneath, the static
+ * hero image sits behind two motion layers: framer's scroll-driven scale-and-
+ * drift (so the image parallaxes as you scroll past), and a longer, slower
+ * ambient breathing loop (so the hero never looks fully still even before any
+ * scroll happens). Reassembles on scroll-up.
  */
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -149,28 +148,29 @@ export default function Hero() {
                 style={{ y: videoY, scale: videoScale }}
                 className="absolute inset-0"
               >
-                <video
-                  className="absolute inset-0 z-10 h-full w-full object-cover"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster="/assets/img/lysning-hero.jpg"
-                  preload="none"
+                <motion.div
+                  initial={{ scale: 1.04 }}
+                  animate={{
+                    scale: [1.04, 1.08, 1.04],
+                    x: ["0%", "-1.2%", "0%"],
+                    y: ["0%", "-0.8%", "0%"],
+                  }}
+                  transition={{
+                    duration: 22,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute inset-0 origin-[60%_55%]"
                 >
-                  <source
-                    src="/generated/videos/lysning-hero-360.mp4"
-                    type="video/mp4"
+                  <Image
+                    src="/assets/img/lysning-hero.jpg"
+                    alt={`${brand.name} — utvalgt prosjekt`}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    className="object-cover"
                   />
-                </video>
-                <Image
-                  src="/assets/img/lysning-hero.jpg"
-                  alt={`${brand.name} — utvalgt prosjekt`}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="object-cover"
-                />
+                </motion.div>
               </motion.div>
 
               <div className="absolute left-5 top-5 z-20 inline-flex items-center gap-2 rounded-full bg-bone/85 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-charcoal backdrop-blur-md ring-1 ring-charcoal/5">

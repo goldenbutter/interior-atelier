@@ -23,7 +23,7 @@ Manual workflow at [labs.google/fx](https://labs.google/fx) → Whisk. Use this 
 | lysning-fjordstuen | ✓ | ✓ |
 | lysning-bryggehuset | ✓ | ✓ |
 | lysning-holmenkollen | ✓ | ✓ |
-| lysning-hero | — | ✓ |
+| lysning-hero | ✓ | ✓ |
 | lysning-atelier | — | ✓ |
 | lysning-detail-textile | — | ✓ |
 | lysning-detail-oak | — | ✓ |
@@ -141,6 +141,23 @@ Manual workflow at [labs.google/fx](https://labs.google/fx) → Whisk. Use this 
 > Square 1:1 aspect ratio macro photograph of a hand-finished Norwegian oak surface, brushed and oiled to a soft satin sheen. Subtle ray flecks visible, fine grain pattern, one small knot near the bottom edge. Warm directional light from upper left. Editorial detail shot for an interior design portfolio. Restrained natural tone palette, soft contrast.
 >
 > Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Avoid HDR, oversaturation, harsh shadows, lens flare, digital noise.
+
+---
+
+### Run 9 — `lysning-hero.jpg` *(both tiers · horizontal hero replacement)*
+
+The same Bjørkely living room as Run 1, but framed wide as a horizontal hero — used by **both** prototypes' hero section AND as the OG/social-share image. Loaded with furniture and small objects so the scene reads "lived-in interior architect's home" rather than empty showroom.
+
+- **Whisk aspect button:** **LANDSCAPE (16:9)**
+- **Save to:**
+  - `prototypes/classic/public/assets/img/lysning-hero.jpg`
+  - `prototypes/premium/public/assets/img/lysning-hero.jpg`
+
+> Horizontal 16:9 aspect ratio editorial interior photograph of a 1930s Norwegian Funkis villa living room in Bygdøy, Oslo. The composition extends across the full width of the room. On the left: a single mid-century armchair upholstered in oat wool, a small timber side table next to it holding a stack of two art books and a small brass reading lamp, a low timber stool nearby with a folded magazine. In the centre: a cream linen sofa with rounded back, a folded oat-wool throw draped casually over one arm, a low travertine coffee table in front of it holding a single dark ceramic vase with dried branches and a shallow Mokum-style ceramic bowl beside it. On the right: tall paned windows with linen curtains looking out onto bare birch trees in late afternoon north light, a tall pleated paper lamp glowing softly between the windows, a large floor-standing terracotta urn beside the windows. A framed black-and-white architectural photograph hangs on the back wall above the sofa. Oak parquet floor, jute rug spanning the foreground, walls in warm bone with subtle texture. Late winter daylight, calm, lived-in.
+>
+> Editorial Nordic interior photography. Natural daylight, soft contrast, warm undertones (bone, cream, oak, clay, charcoal). Lived-in feel. Hand-loomed wool, oak parquet, linen, brass fixtures, travertine, terracotta. Composition: horizontal magazine spread, balanced asymmetric, magazine-grade (Wallpaper / AD / The World of Interiors). Avoid HDR, oversaturation, harsh shadows, modern tech aesthetics, lens flare, digital noise. No people in the image.
+
+> **Tip:** if the first generation looks empty, regenerate emphasizing density — the goal is for the eye to find a new detail every two seconds (vase, books, throw, art on wall, urn, lamps). Pick the variant where the sofa stays the visual anchor and the right-side window light still draws the eye outward.
 
 ---
 
