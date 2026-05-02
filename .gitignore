@@ -58,3 +58,11 @@ CLAUDE.md
 AGENTS.md
 **/CLAUDE.md
 **/AGENTS.md
+
+# Per-prototype Nano Banana staging
+_public/
+
+# Agent-internal artifacts (lead research, prospect lists, search prompts, decisions)
+# Exception: BUILD_PROGRESS.md is the project's tracked change log — keep visible on GitHub
+_docs/*
+!_docs/BUILD_PROGRESS.md
