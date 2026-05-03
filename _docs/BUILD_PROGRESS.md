@@ -103,3 +103,15 @@ None. Both sites are live, deploys are properly isolated, all visual work is shi
 
 1. ~~Register `norway-interior-designer` Claude Code skill~~ ✅ shipped as `interiørdesigner-skill`
 2. Consider adopting bakery's 4-round customer-style review process for any future material change to either tier — bakery surfaced 4 anti-patterns per round that the original build missed
+
+---
+
+### Customer-fork finish checklist — completed 2026-05-03
+
+- [x] **Section A** — OG variants generated (`lysning-og-preview.jpg` per tier under `public/assets/img/`), 1200×630 at 82 KB (classic) / 70 KB (premium). Both tiers' `app/layout.tsx` updated: `metadata.openGraph.images[0]` and `metadata.twitter.images[0]` now point at the dedicated variant. `metadataBase` resolves the relative path to absolute URLs in rendered HTML, satisfying WhatsApp's crawler.
+- [x] **Section B** — Single bundled commit `9921cbf` (4 files: 2× layout.tsx + 2× lysning-og-preview.jpg) deliberately touched both project roots in one push to defeat the `git diff HEAD^ HEAD` ignored-build-step gotcha. Both Vercel projects reached `state: READY` for SHA `9921cbf` on production:
+  - classic = `dpl_ACVQKRkpMspebMhwmBjZU5rYuCHU` (built 22 sec, aliased to `demo-lysning-classic.ibithun.com`)
+  - premium = `dpl_Fz9oy7MwsTRE1Mq5WBbqg84xETai` (built 26 sec, aliased to `demo-lysning-premium.ibithun.com`)
+  - Note: the two preceding `docs:` commits (`d596909`, `32bf66f`) were CANCELED on both projects — confirms the gotcha is real for this repo. Bundling layout.tsx + new image into one commit was the prevention.
+- [x] **Section C** — Live HTML verified via `curl`: `og:image`/`twitter:image` resolve to absolute `https://` URLs, declared dimensions match (1200×630), `og:url` matches the page, `twitter:card=summary_large_image` present. Live image bytes confirmed via `HEAD` request: classic = 82,015 bytes, premium = 70,645 bytes (both well below WhatsApp's 600 KB ceiling). Both prototypes are single-route apps (one shareable page each), so per-page coverage is complete.
+- Reference: `C:\Project\prototypes\_docs\_skill\CUSTOMER-FORK-FINISH-CHECKLIST.md`.
