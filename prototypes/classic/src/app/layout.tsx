@@ -45,9 +45,9 @@ export const metadata: Metadata = {
     locale: "nb_NO",
     images: [
       {
-        url: "/assets/img/lysning-hero.jpg",
-        width: 2400,
-        height: 1340,
+        url: "/assets/img/lysning-og-preview.jpg",
+        width: 1200,
+        height: 630,
         alt: `${brand.name} — Bjørkely-villaen, Bygdøy`,
       },
     ],
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${brand.name} — Interiørarkitektur i Trøndelag`,
     description: siteDescription,
-    images: ["/assets/img/lysning-hero.jpg"],
+    images: ["/assets/img/lysning-og-preview.jpg"],
   },
 };
 
