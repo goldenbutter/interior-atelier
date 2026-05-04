@@ -65,4 +65,6 @@ _public/
 # Agent-internal artifacts (lead research, prospect lists, search prompts, decisions)
 # Exception: BUILD_PROGRESS.md is the project's tracked change log — keep visible on GitHub
 _docs/*
-!_docs/BUILD_PROGRESS.md
+!_docs/_prompt/
+_docs/_prompt/*
+!_docs/_prompt/BUILD_PROGRESS.md

@@ -1,6 +1,6 @@
 # BUILD_PROGRESS — interiørdesigner (Lysning Studio / Interior Atelier)
 
-> **Append-only build log.** Family-wide convention as of 2026-05-02 — lives at `_docs/BUILD_PROGRESS.md`, tracked in git, recoverable from any clone.
+> **Append-only build log.** Family-wide convention as of 2026-05-02 — lives at `_docs/_prompt/BUILD_PROGRESS.md` (relocated from `_docs/BUILD_PROGRESS.md` on 2026-05-04), tracked in git, recoverable from any clone.
 >
 > **Provenance:** content below was migrated from `.claude/plan/build-progress.md` (gitignored, local-only) on 2026-05-02 so the change history is GitHub-visible and survives laptop death. The two cross-references inside the original (`build-plan.md`, `skill-brief.md`) are sibling planning docs that stayed gitignored under `.claude/plan/` and are not migrated. The original location was deleted after migration to keep a single source of truth.
 >
