@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 // Six dedicated material macros plus one wide context shot showing the same
-// materials assembled in a real interior. Generated via the prompts in
-// scripts/whisk-prompts.md sections A and C. For per-client builds, regenerate
-// with the studio's actual palette.
+// materials assembled in a real interior. Generated via the prompts in the
+// internal _docs/scripts/whisk-prompts.md sections A and C. For per-client
+// builds, regenerate with the studio's actual palette.
 type Sample = {
   label: string;
   sub: string;

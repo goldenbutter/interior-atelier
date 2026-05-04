@@ -51,7 +51,7 @@ Both share the same fictional brand identity, Norwegian copy, fonts (Cormorant G
 - **Motion:** `framer-motion` 12 (premium only) · IntersectionObserver-driven CSS reveal (classic)
 - **Icons:** `@phosphor-icons/react`
 - **Typography:** Cormorant Garamond (display) · Geist (body) · Geist Mono (editorial), all via `next/font/google`
-- **Imagery:** curated stills generated via Whisk (labs.google) and Nano Banana (Gemini 2.5 Flash Image); chroma-keyed badge logo via Sharp + flood-fill. A premium hero video via Whisk image-to-video is documented in `scripts/whisk-prompts.md` for future iterations but is not wired into v1 — the v1 hero uses a static still with a CSS ambient-breathing animation
+- **Imagery:** curated stills generated via Whisk (labs.google) and Nano Banana (Gemini 2.5 Flash Image); chroma-keyed badge logo via Sharp + flood-fill. A premium hero video via Whisk image-to-video is documented in the internal `_docs/scripts/whisk-prompts.md` for future iterations but is not wired into v1 — the v1 hero uses a static still with a CSS ambient-breathing animation
 - **Hosting:** two Vercel projects, both connected to this GitHub repo with Root Directory pinned per prototype and "Skip deployments when no changes to root" enabled — pushing classic-only changes never rebuilds premium
 
 ## Local dev
@@ -85,20 +85,17 @@ prototypes/
     public/assets/img/        # Brand stills (lysning-*.{jpg,png})
   premium/                    # Premium tier — same shape, framer-motion, more sections
 
-scripts/
-  generate-images.ts          # Nano Banana / Gemini Flash image generation (paid path)
-  whisk-prompts.md            # Whisk prompt library (free fallback for stills + video)
-  remove-bg.mjs               # Sharp-based flood-fill chroma key for the badge logo
-  prompts/                    # Versioned image-generation prompts
-
 docs/
   media/                      # README screenshots & GIFs (drop targets)
+
+# Internal-only (gitignored): _docs/scripts/ holds the asset-gen pipeline
+# (generate-images.ts, whisk-prompts.md, remove-bg.mjs, prompts/, customer-fork.md)
 ```
 
 ## Notes on the build process
 
 - **Per-prototype source of truth** for brand identity. Each prototype carries its own `src/lib/brand.ts` and `src/lib/copy/no.ts`, imported via the `@shared/*` path alias. The earlier monorepo-shared `shared/` folder at the repo root was inlined into each prototype because Vercel's per-project Root Directory setting only uploads files inside the specified subfolder during build.
 - **Skip-deployments isolation** so each prototype builds independently. With the GitHub integration connected, a push that only touches `prototypes/classic/**` redeploys only classic; same for premium. Root-only doc changes (this README) redeploy neither.
-- **Brand badge logo** is a flood-fill chroma-key derivative of a single source PNG — cream interior preserved inside the circle outline, transparent halo outside, so the same asset reads on both light and dark surfaces without needing per-context variants. See [scripts/remove-bg.mjs](scripts/remove-bg.mjs).
+- **Brand badge logo** is a flood-fill chroma-key derivative of a single source PNG — cream interior preserved inside the circle outline, transparent halo outside, so the same asset reads on both light and dark surfaces without needing per-context variants. The regen script lives in the internal `_docs/scripts/remove-bg.mjs` (gitignored).
 
 Developed by **Bithun**.

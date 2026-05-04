@@ -34,7 +34,7 @@ npm run dev         # http://localhost:3000
 
 ## Hero imagery
 
-The hero `<Image>` references `/assets/img/lysning-hero.jpg`. The committed version is a Whisk-generated still (16:9 horizontal, angled mid-century sofa with travertine coffee table, brass lamp, paper standing lamp, terracotta urn, framed architectural print). Source prompts live in [scripts/whisk-prompts.md](../../scripts/whisk-prompts.md) (Run 9). Replace with a per-customer hero by regenerating from the same prompt with the studio's actual room references.
+The hero `<Image>` references `/assets/img/lysning-hero.jpg`. The committed version is a Whisk-generated still (16:9 horizontal, angled mid-century sofa with travertine coffee table, brass lamp, paper standing lamp, terracotta urn, framed architectural print). Source prompts live upstream in the monorepo's internal `_docs/scripts/whisk-prompts.md` (gitignored, agent-internal — Run 9). Replace with a per-customer hero by regenerating from the same prompt with the studio's actual room references.
 
 ## Stripe hook (deferred to per-client)
 
@@ -63,4 +63,4 @@ vercel --cwd prototypes/premium --prod
 - Cormorant Garamond · Geist · Geist Mono
 - Brand identity in `src/lib/brand.ts`, copy in `src/lib/copy/no.ts`
 - `@vercel/analytics` for traffic + Web Vitals
-- `sharp` + `png-to-ico` for the brand badge logo + multi-resolution favicon (run `node scripts/remove-bg.mjs` from repo root to regenerate)
+- `sharp` + `png-to-ico` for the brand badge logo + multi-resolution favicon (run `node _docs/scripts/remove-bg.mjs` from repo root to regenerate)
